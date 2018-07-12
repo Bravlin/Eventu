@@ -1,0 +1,112 @@
+@font-face{
+    font-family: "taurusLight";
+    src: url("../src/fuentes/Taurus-Light.woff");
+}
+
+:root{
+    --eventu-red: rgb(223, 69, 69);
+    --eventu-pink: rgb(238, 134, 134);
+}
+
+.eventuButton{
+    color: white;
+    background-color: var(--eventu-red);
+    border: none;
+}
+
+.eventuButton:hover{
+    background-color: var(--eventu-pink);
+    color: white;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    font-family: "taurusLight";
+    font-size: 4em;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+header .logo{
+    color: var(--eventu-red);
+}
+
+footer .logo{
+    margin-top: 0;
+    color: white;
+}
+
+footer .container-fluid{
+    background-color: black;
+    height: 100%;
+}
+
+footer .redes{
+    margin-top: 3em;
+}
+
+footer .redes p{
+    color: white;
+    font-size: 1.75em;
+    margin-bottom: 1.5em;
+}
+
+footer .redes a{
+    color: white;
+    font-size: 3em;
+    margin: 8%;
+}
+
+footer .copyright{
+    margin-top: 4em;
+    color: white;
+}
+
+.navbar{
+    background-color: var(--eventu-red);
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-nav{
+    flex-direction: row;
+}
+
+.navbar a{
+    color: white;
+}
+
+.navbar li{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.navbar li.active{
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+
+.navbar-brand{
+    font-family: "taurusLight";
+}
+
+.navbar .btn{
+    background-color: white;
+    color: var(--eventu-red);
+    border: none;
+}
+
+.navbar .btn:hover{
+    color: var(--eventu-pink);
+}
+
+.navbar .btn:focus{
+    background-color: var(--eventu-pink);
+    color: white;
+}
+
+.navbar-brand{
+    font-size: 2em;
+}

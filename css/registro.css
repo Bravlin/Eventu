@@ -1,0 +1,45 @@
+.contenedor-pagina{
+    background-color: rgb(223, 69, 69);
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+
+.form-container{
+    width: 100%;
+}
+
+form{
+    background-color: white;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+form h1{
+    color: rgb(92, 92, 92);
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 2em;
+}
+
+.row{
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 2em;
+}
+
+.elemento-form{
+    margin-bottom: 1em;
+}
+
+.eventuButton{
+    font-size: 1.5em;
+    width: 40%;
+}

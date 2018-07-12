@@ -1,0 +1,48 @@
+.jumbotron.bienvenida{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.bienvenida{
+    display: block;
+    position: relative;
+}
+
+.bienvenida::after{
+    content: "";
+    background-image: url("../src/imagenes/event-distribution.png");
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.bienvenida h1{
+    color: rgb(92, 92, 92);
+}
+
+.bienvenida .eventuButton{
+    font-size: 3em;
+    margin-top: 80px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px; 
+}
+
+.presentacion{
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+.presentacion .row{
+    margin-top: 3em;
+}
+
+.presentacion .row *{
+    padding-left: 5%;
+    padding-right: 5%;
+}

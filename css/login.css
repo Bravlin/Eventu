@@ -1,0 +1,47 @@
+.contenedor-pagina{
+    background-color: rgb(223, 69, 69);
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+
+.form-container{
+    width: 100%;
+}
+
+form{
+    background-color: white;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+form *{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form h1{
+    color: rgb(92, 92, 92);
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 2em;
+}
+
+.form-control{
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+form div{
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form p{
+    margin-top: 2.5%;
+}
