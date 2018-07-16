@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Registro</title>
-    <?php require('header-comun.php'); ?>
+    <?php require('head-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/registro.css">
 </head>
 <body>
