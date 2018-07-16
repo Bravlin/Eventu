@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Eventu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/miestilo.css">
+    <?php require('header-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/bienvenida.css">
 </head>
 <body>
@@ -19,7 +15,7 @@
         <div class="jumbotron text-center bienvenida">
             <h1>Los momentos que importan, siempre con vos</h1>
             <div><a class="btn eventuButton" href="">Registrarse</a></div>
-            <div><a href="login.html">¿Ya tienes una cuenta?</a></div>
+            <div><a href="login.php">¿Ya tienes una cuenta?</a></div>
         </div>
         <div class="container presentacion">
             <h2 class="text-center">¿Qué es Eventu?</h2>
@@ -33,6 +29,6 @@
             </div>
         </div>
     </div>
-    <?php require('footer-simple'); ?>
+    <?php require('footer-simple.php'); ?>
 </body>
 </html>

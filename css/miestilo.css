@@ -56,7 +56,6 @@ footer .redes p{
 footer .redes a{
     color: white;
     font-size: 3em;
-    margin: 8%;
 }
 
 footer .copyright{
@@ -68,10 +67,6 @@ footer .copyright{
     background-color: var(--eventu-red);
     padding-top: 0;
     padding-bottom: 0;
-}
-
-.navbar-nav{
-    flex-direction: row;
 }
 
 .navbar a{

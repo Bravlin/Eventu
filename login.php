@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/miestilo.css">
+    <?php require('header-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
@@ -30,10 +26,10 @@
                     <button class="btn eventuButton" type="submit">Acceder</button>
                 </div>
                 <p><a href="">¿Olvidaste tu contraseña?</a></p>
-                <p><a href="registro.html">Registrate</a></p>
+                <p><a href="registro.php">Registrate</a></p>
             </form>
         </div>
     </div>
-    <?php require('footer-simple'); ?>
+    <?php require('footer-simple.php'); ?>
 </body>
 </html>
