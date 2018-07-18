@@ -1,9 +1,15 @@
+<?php
+    require('db.php');
+    $provincias_query = mysqli_query($db, "SELECT * FROM provincias ORDER BY nombre ASC;");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Registro</title>
     <?php require('head-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/registro.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -44,11 +50,19 @@
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="provincia">Provincia</label>
-                        <input id="provincia" type="text" class="form-control" placeholder="Provincia">
+                        <select id="provincia" class="form-control">
+                            <option value="">Elija una provincia...</option>
+                            <?php
+                                while ($provincia = mysqli_fetch_array($provincias_query))
+                                    echo "<option value='".$provincia['codProvincia']."'>".$provincia['nombre']."</option>";
+                            ?>
+                        </select>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="ciudad">Ciudad</label>
-                        <input id="ciudad" type="text" class="form-control" placeholder="Ciudad">
+                        <select id="ciudad" class="form-control">
+                            <option value="">Primero elija una provincia</option>
+                        </select>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="contrasena">Contraseña</label>
@@ -66,5 +80,26 @@
         </div>
     </div>
     <?php require('footer-simple.php'); ?>
+    
+    <script type="text/javascript">
+        /*global $*/
+        $(document).ready(function(){
+            $('#provincia').on('change',function(){
+                var codProvincia = $(this).val();
+                if (codProvincia){
+                    $.ajax({
+                        type:'POST',
+                        url:'ajaxData.php',
+                        data:'codProvincia='+codProvincia,
+                        success:function(html){
+                            $('#ciudad').html(html); 
+                        }
+                    }); 
+                }
+                else
+                    $('#ciudad').html('<option value="">Primero elija una provincia</option>');
+            });
+        });
+    </script>
 </body>
 </html>
