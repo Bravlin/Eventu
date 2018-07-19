@@ -43,3 +43,11 @@ form h1{
     font-size: 1.5em;
     width: 40%;
 }
+
+.erroneo{
+    background-color: #ff0000;
+}
+
+.valido{
+    background-color: #00ff00;
+}
