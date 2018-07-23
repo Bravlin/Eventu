@@ -51,3 +51,9 @@ form h1{
 .valido{
     background-color: #00ff00;
 }
+
+.alerta{
+    color: red;
+    font-size: 0.8em;
+    padding-left: 10px;
+}

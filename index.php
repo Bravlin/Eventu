@@ -1,3 +1,7 @@
+<?php
+    require('db.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +18,7 @@
         </header>
         <div class="jumbotron text-center bienvenida">
             <h1>Los momentos que importan, siempre con vos</h1>
-            <div><a class="btn eventuButton" href="">Registrarse</a></div>
+            <div><a class="btn eventuButton" href="registro.php">Registrarse</a></div>
             <div><a href="login.php">¿Ya tienes una cuenta?</a></div>
         </div>
         <div class="container presentacion">

@@ -1,6 +1,49 @@
 <?php
     require('db.php');
-    $provincias_query = mysqli_query($db, "SELECT * FROM provincias ORDER BY nombre ASC;");
+    $confirma = $_REQUEST['confirma'];
+    $nombres_ok = true;
+    $apellidos_ok = true;
+    $fecnac_ok = true;
+    $email_ok = true;
+    $calle_ok = true;
+    $callealt_ok = true;
+    $provincia_ok = true;
+    $ciudad_ok = true;
+    $contrasena_ok = true;
+    if ($confirma == 'si'){
+        $nombres = $_REQUEST['nombres'];
+        $apellidos = $_REQUEST['apellidos'];
+        $fecnac = $_REQUEST['fecnac'];
+        $email = $_REQUEST['email'];
+        $calle = $_REQUEST['calle'];
+        $callealt = $_REQUEST['callealt'];
+        $codProvincia = $_REQUEST['provincia'];
+        $codCiudad = $_REQUEST['ciudad'];
+        $contrasena = $_REQUEST['contrasena'];
+        $contrasVerif = $_REQUEST['contrasverif'];
+        // Validaciones
+        $nombres_ok = $nombres != '';
+        $apellidos_ok = $apellidos != '';
+        $fecnac_ok = true; // Arreglar esto
+        $email_ok = validaEmail($email, $db);
+        $calle_ok = $calle != '';
+        $callealt_ok = $callealt > 0;
+        $provincia_ok = $codProvincia > 0;
+        $ciudad_ok = $codCiudad > 0;
+        $contrasena_ok = $contrasena != '' && $contrasena == $contrasVerif;
+        if ($nombres_ok && $apellidos_ok && $fecnac_ok && $email_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $contrasena_ok){
+            $contrasena = md5($contrasena);
+            mysqli_query($db, "INSERT INTO direcciones (calle, altura, codCiudad) VALUES ('$calle', '$callealt', '$codCiudad');");
+            $direccion = mysqli_insert_id($db);
+            mysqli_query($db, "INSERT INTO usuarios (nombres, apellidos, fechaNac, email, clave, idDireccion)
+            VALUES ('$nombres', '$apellidos', '$fecnac', '$email', '$contrasena', '$direccion');");
+            header("location: login.php");
+        }
+    }
+    
+    function validaEmail($email, $db){
+        return filter_var($email, FILTER_VALIDATE_EMAIL) && mysqli_query($db, "SELECT * FROM usuarios WHERE email = '$email';") != NULL;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -21,56 +64,102 @@
     </div>
     <div class="contenedor-pagina">
         <div class="form-container">
-            <form>
+            <form method="POST">
                 <h1 class="text-center">¡Únete para no volver a perderte un evento!</h1>
+                <input type="hidden" name="confirma" value="si"/>
                 <div class="row">
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="nombres">Nombres</label>
-                        <input id="nombres" type="text" class="form-control" placeholder="Juan Martín">
+                        <input id="nombres" name="nombres" type="text" class="form-control" placeholder="Juan Martín"
+                        value="<?php if(isset($_REQUEST['nombres'])) echo $_REQUEST['nombres']; ?>" required>
+                        <?php
+                            if (!$nombres_ok)
+                                echo '<p class="alerta">El nombre no puede quedar vacío</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="apellidos">Apellidos</label>
-                        <input id="apellidos" type="text" class="form-control" placeholder="Pérez González">
+                        <input id="apellidos" name="apellidos" type="text" class="form-control" placeholder="Pérez González"
+                        value="<?php if(isset($_REQUEST['apellidos'])) echo $_REQUEST['apellidos']; ?>" required>
+                        <?php
+                            if (!$apellidos_ok)
+                                echo '<p class="alerta">El apellido no puede quedar vacío</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="fechaNac">Fecha de nacimiento</label>
-                        <input id="fechaNac" type="date" class="form-control">
+                        <input id="fechaNac" name="fecnac" type="date" class="form-control"
+                        value="<?php if(isset($_REQUEST['fecnac'])) echo $_REQUEST['fecnac']; ?>" required>
+                        <?php
+                            if (!$fecnac_ok)
+                                echo '<p class="alerta">Ingrese una fecha válida</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="email">E-mail</label>
-                        <input id="email" type="email" class="form-control" placeholder="xxx@xxx.xxx">
+                        <input id="email" name="email" type="email" class="form-control" placeholder="xxx@xxx.xxx"
+                        value="<?php if(isset($_REQUEST['email'])) echo $_REQUEST['email']; ?>" required>
+                        <?php
+                            if (!$email_ok)
+                                echo '<p class="alerta">Email inválido</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="calle">Calle del domicilio</label>
-                        <input id="calle" type="text" class="form-control" placeholder="Calle">
+                        <input id="calle" name="calle" type="text" class="form-control" placeholder="Calle"
+                        value="<?php if(isset($_REQUEST['calle'])) echo $_REQUEST['calle']; ?>" required>
+                        <?php
+                            if (!$calle_ok)
+                                echo '<p class="alerta">La calle no puede quedar vacía</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="altura">Altura del domicilio</label>
-                        <input id="altura" type="number" class="form-control" placeholder="123">
+                        <input id="altura" name="callealt" type="number" class="form-control" placeholder="123"
+                        value="<?php if(isset($_REQUEST['callealt'])) echo $_REQUEST['callealt']; ?>" required>
+                        <?php
+                            if (!$callealt_ok)
+                                echo '<p class="alerta">Altura inválida</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="provincia">Provincia</label>
-                        <select id="provincia" class="form-control">
+                        <select id="provincia" name="provincia" class="form-control" required>
                             <option value="">Elija una provincia...</option>
                             <?php
+                                $provincias_query = mysqli_query($db, "SELECT * FROM provincias ORDER BY nombre ASC;");
                                 while ($provincia = mysqli_fetch_array($provincias_query))
                                     echo "<option value='".$provincia['codProvincia']."'>".$provincia['nombre']."</option>";
                             ?>
                         </select>
+                        <?php
+                            if (!$provincia_ok)
+                                echo '<p class="alerta">Ninguna provincia ha sido seleccionada</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="ciudad">Ciudad</label>
-                        <select id="ciudad" class="form-control">
+                        <select id="ciudad" name="ciudad" class="form-control" required>
                             <option value="">Primero elija una provincia</option>
                         </select>
+                        <?php
+                            if (!$ciudad_ok)
+                                echo '<p class="alerta">Ninguna ciudad ha sido seleccionada</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="contrasena">Contraseña</label>
-                        <input id="contrasena" type="password" class="form-control" placeholder="*****">
+                        <input id="contrasena" name="contrasena" type="password" class="form-control" placeholder="*****"
+                        value="<?php if(isset($_REQUEST['contrasena'])) echo $_REQUEST['contrasena']; ?>" required>
+                        <?php
+                            if (!$contrasena_ok)
+                                echo '<p class="alerta">La contraseña no puede quedar vacía</p>';
+                        ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="contrasenaVerificacion">Verifique la contraseña</label>
-                        <input id="contrasenaVerificacion" type="password" class="form-control" placeholder="*****">
+                        <input id="contrasenaVerificacion" name="contrasverif" type="password" class="form-control" placeholder="*****"
+                        value="<?php if(isset($_REQUEST['contrasverif'])) echo $_REQUEST['contrasverif']; ?>" required>
                     </div>
                 </div>
                 <div class="row justify-content-center">

@@ -42,6 +42,11 @@ form div{
     align-items: center;
 }
 
-form p{
+.bis{
     margin-top: 2.5%;
+}
+
+.alerta{
+    color: red;
+    font-size: 0.8em;
 }
