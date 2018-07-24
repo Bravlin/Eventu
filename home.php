@@ -1,3 +1,9 @@
+<?php
+    $requiere_sesion = true;
+    require('sesion-redireccion.php');
+    require('db.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,30 +13,10 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/miestilo.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navegacionPrincipal" aria-controls="navegacionPrincipal" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navegacionPrincipal">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href=""><b>Inicio</b></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><b>Notificaciones</b></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href=""><b>Mi perfil</b></a>
-                </li>
-            </ul>
-        </div>
-        <a class="navbar-brand" href=""><b>Eventu</b></a>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search">
-            <button class="btn my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </nav>
+    <?php require ('navbar.php'); ?>
 </body>
 </html>

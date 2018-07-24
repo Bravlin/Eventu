@@ -1,5 +1,9 @@
 <?php
+    $requiere_sesion = false;
+    require('sesion-redireccion.php');
     require('db.php');
+    
+    // Verificadores
     $confirma = $_REQUEST['confirma'];
     $nombres_ok = true;
     $apellidos_ok = true;
@@ -10,6 +14,8 @@
     $provincia_ok = true;
     $ciudad_ok = true;
     $contrasena_ok = true;
+    
+    // Procesamiento del formulario
     if ($confirma == 'si'){
         $nombres = $_REQUEST['nombres'];
         $apellidos = $_REQUEST['apellidos'];
@@ -51,7 +57,7 @@
 <head>
     <title>Registro</title>
     <?php require('head-comun.php'); ?>
-    <link rel="stylesheet" type="text/css" href="css/registro.css">
+    <link rel="stylesheet" type="text/css" href="css/formulario.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -62,9 +68,9 @@
             </div>
         </header>
     </div>
-    <div class="contenedor-pagina">
+    <div class="contenedor-pagina color-eventu-red">
         <div class="form-container">
-            <form method="POST">
+            <form class="formulario-principal color-blanco" method="POST">
                 <h1 class="text-center">¡Únete para no volver a perderte un evento!</h1>
                 <input type="hidden" name="confirma" value="si"/>
                 <div class="row">

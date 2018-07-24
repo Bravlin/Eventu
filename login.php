@@ -1,4 +1,6 @@
 <?php
+    $requiere_sesion = false;
+    require('sesion-redireccion.php');
     require('db.php');
     $msg_error = -1;
     $confirma = $_REQUEST['confirma'];

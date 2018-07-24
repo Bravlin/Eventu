@@ -1,15 +1,21 @@
 .contenedor-pagina{
-    background-color: rgb(223, 69, 69);
-    padding-top: 7%;
-    padding-bottom: 7%;
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
 }
 
 .form-container{
     width: 100%;
 }
 
-form{
+.color-blanco{
     background-color: white;
+}
+
+.color-eventu-red{
+    background-color: rgb(223, 69, 69);
+}
+
+.formulario-principal{
     width: 60%;
     margin-left: auto;
     margin-right: auto;
@@ -19,7 +25,7 @@ form{
     padding-right: 1em;
 }
 
-form h1{
+.formulario-principal h1{
     color: rgb(92, 92, 92);
     padding-bottom: 5%;
     padding-left: 5%;

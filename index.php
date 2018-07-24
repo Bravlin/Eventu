@@ -1,4 +1,6 @@
 <?php
+    $requiere_sesion = false;
+    require('sesion-redireccion.php');
     require('db.php');
 ?>
 
