@@ -30,9 +30,9 @@
         $callealt_ok = $callealt > 0;
         $provincia_ok = $codProvincia != "";
         $ciudad_ok = $codCiudad != "";
-        $fecnac_ok = true; // Implementar esto
+        $fecreal_ok = compararFechas($fecreal, date("Y-m-d h:i:sa")) > 0;
         $categoria_ok = $idCategoria != "";
-        if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecnac_ok){
+        if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok){
             mysqli_query($db, "INSERT INTO direcciones (calle, altura, codCiudad) VALUES ('$calle', '$callealt', '$codCiudad');");
             $direccion = mysqli_insert_id($db);
             $idUsuario = $_SESSION['idUsuario'];
@@ -46,6 +46,19 @@
         }
     }
     
+    // Esta funcion recibe dos strings de fechas
+    function compararFechas($datetime1, $datetime2){
+        $datetime_obj1 = new DateTime($datetime1);
+        $datetime_obj2 = new DateTime($datetime2);
+        if ($datetime_obj1 > $datetime_obj2)
+            return 1;
+        elseif ($datetime_obj1 < $datetime_obj2)
+            return -1;
+        else
+            return 0;
+    }
+    
+    // Esta funcion recibe un arreglo de etiquetas
     function actualizarEtiquetas($db, $etiquetas, $idEvento){
         foreach ($etiquetas as $nombreEtiqueta){
             $etiquetas_query = mysqli_query($db, "SELECT * FROM etiquetas WHERE nombre = '$nombreEtiqueta';");
@@ -86,7 +99,7 @@
                     <div class="col-12 elemento-form">
                         <label for="nombre">Nombre del evento</label>
                         <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Mi evento"
-                        value="<?php if(isset($_REQUEST['nombres'])) echo $_REQUEST['nombres']; ?>" required>
+                        value="<?php if(isset($_REQUEST['nombre'])) echo $_REQUEST['nombre']; ?>" required>
                         <?php
                             if (!$nombre_ok)
                                 echo '<p class="alerta">El nombre no puede quedar vacío</p>';
@@ -94,8 +107,7 @@
                     </div>
                     <div class="col-12 elemento-form">
                         <label for="descripcion">Descripción</label>
-                        <textarea id="descripcion" name="descripcion" type="text" class="form-control" placeholder="Describa al evento..."
-                        value="<?php if(isset($_REQUEST['apellidos'])) echo $_REQUEST['apellidos']; ?>"></textarea>
+                        <textarea id="descripcion" name="descripcion" type="text" class="form-control" placeholder="Describa al evento..."><?php if(isset($_REQUEST['descripcion'])) echo $_REQUEST['descripcion']; ?></textarea>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="calle">Calle</label>
@@ -141,8 +153,8 @@
                         ?>
                     </div>
                     <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="fechaReal">Fecha de realización</label>
-                        <input id="fechaReal" name="fecreal" type="date" class="form-control"
+                        <label for="fechaReal">Fecha y hora de realización</label>
+                        <input id="fechaReal" name="fecreal" type="datetime-local" class="form-control"
                         value="<?php if(isset($_REQUEST['fecnac'])) echo $_REQUEST['fecnac']; ?>" required>
                         <?php
                             if (!$fecreal_ok)
@@ -167,7 +179,7 @@
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="etiquetas">Etiquetas</label>
                         <input id="etiquetas" name="etiquetas" type="text" class="form-control" placeholder="Ingrese las etiquetas separadas por espacios"
-                        value="<?php if(isset($_REQUEST['calle'])) echo $_REQUEST['calle']; ?>">
+                        value="<?php if(isset($_REQUEST['etiquetas'])) echo $_REQUEST['etiquetas']; ?>">
                     </div>
                 </div>
                 <div class="row justify-content-center">

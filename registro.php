@@ -30,7 +30,7 @@
         // Validaciones
         $nombres_ok = $nombres != '';
         $apellidos_ok = $apellidos != '';
-        $fecnac_ok = true; // Arreglar esto
+        $fecnac_ok = compararFechas($fecnac, date("Y-m-d")) < 0;
         $email_ok = validaEmail($email, $db);
         $calle_ok = $calle != '';
         $callealt_ok = $callealt > 0;
@@ -45,6 +45,18 @@
             VALUES ('$nombres', '$apellidos', '$fecnac', '$email', '$contrasena', '$direccion');");
             header("location: login.php");
         }
+    }
+    
+    // Esta funcion recibe dos strings de fechas
+    function compararFechas($datetime1, $datetime2){
+        $datetime_obj1 = new DateTime($datetime1);
+        $datetime_obj2 = new DateTime($datetime2);
+        if ($datetime_obj1 > $datetime_obj2)
+            return 1;
+        elseif ($datetime_obj1 < $datetime_obj2)
+            return -1;
+        else
+            return 0;
     }
     
     function validaEmail($email, $db){

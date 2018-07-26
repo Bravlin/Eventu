@@ -18,5 +18,7 @@
 </head>
 <body>
     <?php require ('navbar.php'); ?>
+    <div class="container">
+    </div>
 </body>
 </html>
