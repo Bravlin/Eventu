@@ -8,10 +8,15 @@
         $email = $_REQUEST['email'];
         $contrasena = $_REQUEST['contrasena'];
         $contrasena = md5($contrasena);
-        $usuario_query = mysqli_query($db, "SELECT * FROM usuarios WHERE email = '$email' AND clave = '$contrasena';");
+        $usuario_query = mysqli_query($db,
+            "SELECT usuarios.idUsuario, direcciones.codCiudad
+            FROM usuarios INNER JOIN direcciones
+            ON usuarios.idDireccion = direcciones.idDireccion
+            WHERE usuarios.email = '$email' AND usuarios.clave = '$contrasena';");
         if (mysqli_num_rows($usuario_query) == 1){
             $usuario = mysqli_fetch_array($usuario_query);
             $_SESSION['idUsuario'] = $usuario['idUsuario'];
+            $_SESSION['codCiudad'] = $usuario['codCiudad'];
             session_write_close();
             header("location: home.php");
         }
@@ -37,7 +42,7 @@
     </div>
     <div class="contenedor-pagina">
         <div class="form-container">
-            <form class="text-center" method="POST">
+            <form class="text-center px-3" method="POST">
                 <h1>Entérate de tus próximos eventos</h1>
                 <input type="hidden" name="confirma" value="si"/>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Email o nombre de usuario" required>

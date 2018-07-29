@@ -78,116 +78,116 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Eventu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/miestilo.css">
+    <?php require('head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/formulario.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
     <?php require ('navbar.php'); ?>
-    <div class="contenedor-pagina">
-        <div class="form-container">
-            <form class="formulario-principal color-blanco" method="POST">
-                <h1 class="text-center">Agrega tu propio evento</h1>
-                <input type="hidden" name="confirma" value="si"/>
-                <div class="row">
-                    <div class="col-12 elemento-form">
-                        <label for="nombre">Nombre del evento</label>
-                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Mi evento"
-                        value="<?php if(isset($_REQUEST['nombre'])) echo $_REQUEST['nombre']; ?>" required>
-                        <?php
-                            if (!$nombre_ok)
-                                echo '<p class="alerta">El nombre no puede quedar vacío</p>';
-                        ?>
-                    </div>
-                    <div class="col-12 elemento-form">
-                        <label for="descripcion">Descripción</label>
-                        <textarea id="descripcion" name="descripcion" type="text" class="form-control" placeholder="Describa al evento..."><?php if(isset($_REQUEST['descripcion'])) echo $_REQUEST['descripcion']; ?></textarea>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="calle">Calle</label>
-                        <input id="calle" name="calle" type="text" class="form-control" placeholder="Calle"
-                        value="<?php if(isset($_REQUEST['calle'])) echo $_REQUEST['calle']; ?>" required>
-                        <?php
-                            if (!$calle_ok)
-                                echo '<p class="alerta">La calle no puede quedar vacía</p>';
-                        ?>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="altura">Altura</label>
-                        <input id="altura" name="callealt" type="number" class="form-control" placeholder="123"
-                        value="<?php if(isset($_REQUEST['callealt'])) echo $_REQUEST['callealt']; ?>" required>
-                        <?php
-                            if (!$callealt_ok)
-                                echo '<p class="alerta">Altura inválida</p>';
-                        ?>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="provincia">Provincia</label>
-                        <select id="provincia" name="provincia" class="form-control" required>
-                            <option value="">Elija una provincia...</option>
-                            <?php
-                                $provincias_query = mysqli_query($db, "SELECT * FROM provincias ORDER BY nombre ASC;");
-                                while ($provincia = mysqli_fetch_array($provincias_query))
-                                    echo "<option value='".$provincia['codProvincia']."'>".$provincia['nombre']."</option>";
-                            ?>
-                        </select>
-                        <?php
-                            if (!$provincia_ok)
-                                echo '<p class="alerta">Ninguna provincia ha sido seleccionada</p>';
-                        ?>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="ciudad">Ciudad</label>
-                        <select id="ciudad" name="ciudad" class="form-control" required>
-                            <option value="">Primero elija una provincia</option>
-                        </select>
-                        <?php
-                            if (!$ciudad_ok)
-                                echo '<p class="alerta">Ninguna ciudad ha sido seleccionada</p>';
-                        ?>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="fechaReal">Fecha y hora de realización</label>
-                        <input id="fechaReal" name="fecreal" type="datetime-local" class="form-control"
-                        value="<?php if(isset($_REQUEST['fecnac'])) echo $_REQUEST['fecnac']; ?>" required>
-                        <?php
-                            if (!$fecreal_ok)
-                                echo '<p class="alerta">Ingrese una fecha válida</p>';
-                        ?>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="categoria">Categoría</label>
-                        <select id="categoria" name="categoria" class="form-control" required>
-                            <option value="">Elija una categoría...</option>
-                            <?php
-                                $categorias_query = mysqli_query($db, "SELECT * FROM categorias ORDER BY nombre ASC;");
-                                while ($categoria = mysqli_fetch_array($categorias_query))
-                                    echo "<option value='".$categoria['idCategoria']."'>".$categoria['nombre']."</option>";
-                            ?>
-                        </select>
-                        <?php
-                            if (!$categoria_ok)
-                                echo '<p class="alerta">Ninguna categoría ha sido seleccionada</p>';
-                        ?>
-                    </div>
-                    <div class="col-sm-12 col-md-6 elemento-form">
-                        <label for="etiquetas">Etiquetas</label>
-                        <input id="etiquetas" name="etiquetas" type="text" class="form-control" placeholder="Ingrese las etiquetas separadas por espacios"
-                        value="<?php if(isset($_REQUEST['etiquetas'])) echo $_REQUEST['etiquetas']; ?>">
-                    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <?php require('barra-vertical.php'); ?>
+            <div class="col-12 col-md-10">
+                <div class="form-container">
+                    <form class="formulario-principal color-blanco" method="POST">
+                        <h1 class="text-center">Agrega tu propio evento</h1>
+                        <input type="hidden" name="confirma" value="si"/>
+                        <div class="row cuerpo-form">
+                            <div class="col-12 elemento-form">
+                                <label for="nombre">Nombre del evento</label>
+                                <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Mi evento"
+                                value="<?php if(isset($_REQUEST['nombre'])) echo $_REQUEST['nombre']; ?>" required>
+                                <?php
+                                    if (!$nombre_ok)
+                                        echo '<p class="alerta">El nombre no puede quedar vacío</p>';
+                                ?>
+                            </div>
+                            <div class="col-12 elemento-form">
+                                <label for="descripcion">Descripción</label>
+                                <textarea id="descripcion" name="descripcion" type="text" class="form-control" placeholder="Describa al evento..."><?php if(isset($_REQUEST['descripcion'])) echo $_REQUEST['descripcion']; ?></textarea>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="calle">Calle</label>
+                                <input id="calle" name="calle" type="text" class="form-control" placeholder="Calle"
+                                value="<?php if(isset($_REQUEST['calle'])) echo $_REQUEST['calle']; ?>" required>
+                                <?php
+                                    if (!$calle_ok)
+                                        echo '<p class="alerta">La calle no puede quedar vacía</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="altura">Altura</label>
+                                <input id="altura" name="callealt" type="number" class="form-control" placeholder="123"
+                                value="<?php if(isset($_REQUEST['callealt'])) echo $_REQUEST['callealt']; ?>" required>
+                                <?php
+                                    if (!$callealt_ok)
+                                        echo '<p class="alerta">Altura inválida</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="provincia">Provincia</label>
+                                <select id="provincia" name="provincia" class="form-control" required>
+                                    <option value="">Elija una provincia...</option>
+                                    <?php
+                                        $provincias_query = mysqli_query($db, "SELECT * FROM provincias ORDER BY nombre ASC;");
+                                        while ($provincia = mysqli_fetch_array($provincias_query))
+                                            echo "<option value='".$provincia['codProvincia']."'>".$provincia['nombre']."</option>";
+                                    ?>
+                                </select>
+                                <?php
+                                    if (!$provincia_ok)
+                                        echo '<p class="alerta">Ninguna provincia ha sido seleccionada</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="ciudad">Ciudad</label>
+                                <select id="ciudad" name="ciudad" class="form-control" required>
+                                    <option value="">Primero elija una provincia</option>
+                                </select>
+                                <?php
+                                    if (!$ciudad_ok)
+                                        echo '<p class="alerta">Ninguna ciudad ha sido seleccionada</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="fechaReal">Fecha y hora de realización</label>
+                                <input id="fechaReal" name="fecreal" type="datetime-local" class="form-control"
+                                value="<?php if(isset($_REQUEST['fecnac'])) echo $_REQUEST['fecnac']; ?>" required>
+                                <?php
+                                    if (!$fecreal_ok)
+                                        echo '<p class="alerta">Ingrese una fecha válida</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="categoria">Categoría</label>
+                                <select id="categoria" name="categoria" class="form-control" required>
+                                    <option value="">Elija una categoría...</option>
+                                    <?php
+                                        $categorias_query = mysqli_query($db, "SELECT * FROM categorias ORDER BY nombre ASC;");
+                                        while ($categoria = mysqli_fetch_array($categorias_query))
+                                            echo "<option value='".$categoria['idCategoria']."'>".$categoria['nombre']."</option>";
+                                    ?>
+                                </select>
+                                <?php
+                                    if (!$categoria_ok)
+                                        echo '<p class="alerta">Ninguna categoría ha sido seleccionada</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="etiquetas">Etiquetas</label>
+                                <input id="etiquetas" name="etiquetas" type="text" class="form-control" placeholder="Ingrese las etiquetas separadas por espacios"
+                                value="<?php if(isset($_REQUEST['etiquetas'])) echo $_REQUEST['etiquetas']; ?>">
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <button class="btn eventuButton" type="submit">Enviar</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="row justify-content-center">
-                    <button class="btn eventuButton" type="submit">Enviar</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
+    <?php require('barra-fondo.php'); ?>
     
     <script type="text/javascript" src="js/registro.js"></script>
 </body>

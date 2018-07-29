@@ -85,7 +85,7 @@
             <form class="formulario-principal color-blanco" method="POST">
                 <h1 class="text-center">¡Únete para no volver a perderte un evento!</h1>
                 <input type="hidden" name="confirma" value="si"/>
-                <div class="row">
+                <div class="row cuerpo-form">
                     <div class="col-sm-12 col-md-6 elemento-form">
                         <label for="nombres">Nombres</label>
                         <input id="nombres" name="nombres" type="text" class="form-control" placeholder="Juan Martín"

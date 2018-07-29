@@ -1,0 +1,20 @@
+.card{
+    margin-top: 5em;
+    margin-bottom: 5em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+}
+
+.eventu-red{
+    background-color: rgb(223, 69, 69);
+    color: white;
+}
+
+.eventu-pink-text{
+    color: rgb(238, 134, 134);
+}
+
+.card-header{
+    background-color: white;
+}

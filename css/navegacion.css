@@ -1,0 +1,89 @@
+:root{
+    --eventu-red: rgb(223, 69, 69);
+    --eventu-pink: rgb(238, 134, 134);
+}
+
+.minavbar{
+    background-color: var(--eventu-red);
+    padding-top: 0;
+    padding-bottom: 0;
+    box-shadow: 0 0 1em grey;
+}
+
+.minavbar .navbar-toggler{
+    border: none;
+    color: white;
+}
+
+.minavbar a{
+    color: white;
+}
+
+.minavbar li{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.minavbar li.active{
+    border-bottom-style: solid;
+    border-bottom-color: white;
+}
+
+.minavbar .navbar-brand{
+    font-family: "taurusLight";
+}
+
+.minavbar .boton-busqueda{
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.minavbar .boton-busqueda:hover{
+    color: var(--eventu-pink);
+}
+
+.minavbar .navbar-brand{
+    font-size: 2em;
+}
+
+.fondo-gris{
+    background-color: rgb(240, 240, 240);
+}
+
+.barra-vertical ul{
+    list-style-type: none;
+    padding-left: 1em;
+}
+
+.barra-vertical li{
+    font-size: 1.1em;
+    margin-bottom: 1.5em;
+}
+
+.barra-vertical a, .barra-fondo a{
+    text-decoration: none;
+    color: black;
+}
+
+.barra-vertical a:hover, .barra-fondo a:hover{
+    text-decoration: none;
+    color: var(--eventu-pink);
+}
+
+.barra-vertical i, .barra-fondo i{
+    color: var(--eventu-red);
+}
+
+.barra-vertical i{
+    margin-right: 1em;
+}
+
+.barra-vertical i:hover, .barra-fondo i:hover{
+    color: var(--eventu-pink);
+}
+
+.barra-fondo a p{
+    font-size: 0.75em;
+    margin: 0;
+}

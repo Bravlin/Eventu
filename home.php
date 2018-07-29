@@ -7,18 +7,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
     <title>Eventu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/miestilo.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <?php require('head-navegacion.php'); ?>
+    <link rel="stylesheet" type="text/css" href="css/tarjeta-evento.css">
 </head>
 <body>
     <?php require ('navbar.php'); ?>
-    <div class="container">
+    <div class="container-fluid">
+        <div class="row">
+            <?php require('barra-vertical.php'); ?>
+            <div class="col-12 col-md-10">
+                <?php
+                    $codCiudad = $_SESSION['codCiudad'];
+                    $eventos_query = mysqli_query($db,
+                        "SELECT e.idEvento, e.nombre AS nombreEvento, e.descripcion, e.fechaRealiz,
+                        dir.calle, dir.altura,
+                        ciudades.nombre AS nombreCiudad,
+                        u.nombres AS nombresCread, u.apellidos AS apellidosCread,
+                        categorias.nombre AS nombreCateg
+                        FROM eventos e
+                        INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
+                        INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
+                        INNER JOIN usuarios u ON u.idUsuario = e.idCreador
+                        INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
+                        WHERE dir.codCiudad = '$codCiudad'
+                        ORDER BY e.fechaRealiz ASC;");
+                    while ($evento = mysqli_fetch_array($eventos_query))
+                        require('tarjeta-evento.php');
+                ?>
+            </div>
+        </div>
     </div>
+    <?php require('barra-fondo.php'); ?>
 </body>
 </html>
