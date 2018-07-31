@@ -18,3 +18,12 @@
 .card-header{
     background-color: white;
 }
+
+.tarjeta-evento .enlace-evento{
+    text-decoration: none;
+    color: white;
+}
+
+.tarjeta-evento .enlace-evento:hover{
+    color: var(--eventu-pink);
+}

@@ -23,11 +23,13 @@
                         "SELECT e.idEvento, e.nombre AS nombreEvento, e.descripcion, e.fechaRealiz,
                         dir.calle, dir.altura,
                         ciudades.nombre AS nombreCiudad,
+                        provincias.nombre AS nombreProvincia,
                         u.nombres AS nombresCread, u.apellidos AS apellidosCread,
                         categorias.nombre AS nombreCateg
                         FROM eventos e
                         INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
                         INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
+                        INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                         INNER JOIN usuarios u ON u.idUsuario = e.idCreador
                         INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
                         WHERE dir.codCiudad = '$codCiudad'

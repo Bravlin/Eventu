@@ -40,6 +40,7 @@
             mysqli_query($db, "INSERT INTO eventos (nombre, fechaCreac, fechaRealiz, descripcion, idDireccion, idCreador, idCategoria)
             VALUES ('$nombre', '$fechaCreac', '$fecreal', '$descripcion', '$direccion', '$idUsuario', '$idCategoria');");
             $idEvento = mysqli_insert_id($db);
+            $etiquetas = strtolower($etiquetas);
             $etiquetas = explode(" ", $etiquetas);
             actualizarEtiquetas($db, $etiquetas, $idEvento);
             header("location: home.php");
@@ -107,6 +108,30 @@
                                 <textarea id="descripcion" name="descripcion" type="text" class="form-control" placeholder="Describa al evento..."><?php if(isset($_REQUEST['descripcion'])) echo $_REQUEST['descripcion']; ?></textarea>
                             </div>
                             <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="categoria">Categoría</label>
+                                <select id="categoria" name="categoria" class="form-control" required>
+                                    <option value="">Elija una categoría...</option>
+                                    <?php
+                                        $categorias_query = mysqli_query($db, "SELECT * FROM categorias ORDER BY nombre ASC;");
+                                        while ($categoria = mysqli_fetch_array($categorias_query))
+                                            echo "<option value='".$categoria['idCategoria']."'>".$categoria['nombre']."</option>";
+                                    ?>
+                                </select>
+                                <?php
+                                    if (!$categoria_ok)
+                                        echo '<p class="alerta">Ninguna categoría ha sido seleccionada</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
+                                <label for="fechaReal">Fecha y hora de realización</label>
+                                <input id="fechaReal" name="fecreal" type="datetime-local" class="form-control"
+                                value="<?php if(isset($_REQUEST['fecreal'])) echo $_REQUEST['fecreal']; ?>" required>
+                                <?php
+                                    if (!$fecreal_ok)
+                                        echo '<p class="alerta">Ingrese una fecha válida</p>';
+                                ?>
+                            </div>
+                            <div class="col-sm-12 col-md-6 elemento-form">
                                 <label for="calle">Calle</label>
                                 <input id="calle" name="calle" type="text" class="form-control" placeholder="Calle"
                                 value="<?php if(isset($_REQUEST['calle'])) echo $_REQUEST['calle']; ?>" required>
@@ -149,31 +174,7 @@
                                         echo '<p class="alerta">Ninguna ciudad ha sido seleccionada</p>';
                                 ?>
                             </div>
-                            <div class="col-sm-12 col-md-6 elemento-form">
-                                <label for="fechaReal">Fecha y hora de realización</label>
-                                <input id="fechaReal" name="fecreal" type="datetime-local" class="form-control"
-                                value="<?php if(isset($_REQUEST['fecnac'])) echo $_REQUEST['fecnac']; ?>" required>
-                                <?php
-                                    if (!$fecreal_ok)
-                                        echo '<p class="alerta">Ingrese una fecha válida</p>';
-                                ?>
-                            </div>
-                            <div class="col-sm-12 col-md-6 elemento-form">
-                                <label for="categoria">Categoría</label>
-                                <select id="categoria" name="categoria" class="form-control" required>
-                                    <option value="">Elija una categoría...</option>
-                                    <?php
-                                        $categorias_query = mysqli_query($db, "SELECT * FROM categorias ORDER BY nombre ASC;");
-                                        while ($categoria = mysqli_fetch_array($categorias_query))
-                                            echo "<option value='".$categoria['idCategoria']."'>".$categoria['nombre']."</option>";
-                                    ?>
-                                </select>
-                                <?php
-                                    if (!$categoria_ok)
-                                        echo '<p class="alerta">Ninguna categoría ha sido seleccionada</p>';
-                                ?>
-                            </div>
-                            <div class="col-sm-12 col-md-6 elemento-form">
+                            <div class="col-12 elemento-form">
                                 <label for="etiquetas">Etiquetas</label>
                                 <input id="etiquetas" name="etiquetas" type="text" class="form-control" placeholder="Ingrese las etiquetas separadas por espacios"
                                 value="<?php if(isset($_REQUEST['etiquetas'])) echo $_REQUEST['etiquetas']; ?>">

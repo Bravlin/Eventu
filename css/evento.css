@@ -1,0 +1,21 @@
+.categoria, .info-general i{
+    color: var(--eventu-pink);
+}
+
+ul.info-general{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.contenedor.mapa{
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.mapa{
+    top:0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+}
