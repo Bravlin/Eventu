@@ -60,7 +60,12 @@
     }
     
     function validaEmail($email, $db){
-        return filter_var($email, FILTER_VALIDATE_EMAIL) && mysqli_query($db, "SELECT * FROM usuarios WHERE email = '$email';") != NULL;
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $query_verificacion = mysqli_query($db, "SELECT * FROM usuarios WHERE email = '$email';");
+            return mysqli_num_rows($query_verificacion) == 0;
+        }
+        else
+            return false;
     }
 ?>
 

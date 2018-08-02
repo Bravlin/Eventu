@@ -4,4 +4,5 @@
     define('DB_PASS', "");
     define('DB_DB', "c9");
     $db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DB);
+    mysqli_set_charset($db, "utf8");
 ?>

@@ -45,6 +45,17 @@
                             $ubicacion = $evento['calle'].' '.$evento['altura'].', '.$evento['nombreCiudad'].', '.$evento['nombreProvincia'];
                             echo $ubicacion;
                         ?>
+                        <div class="contenedor-nivel2">
+                            <div class="contenedor-mapa">
+                                <iframe class="mapa"
+                                    width="400"
+                                    height="350"
+                                    frameborder="0"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBMTPQ8KW_7vtE_nChnfCgM-AsJTSbwQ1k&q=<?php echo urlencode($ubicacion); ?>"
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
                     </li>
                     <li>
                         <i class="fa fa-clock-o"></i>
@@ -70,15 +81,6 @@
                         </b>
                     </li>
                 </ul>
-                <div class="contenedor-mapa">
-                    <iframe class="mapa"
-                        width="400"
-                        height="350"
-                        frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBMTPQ8KW_7vtE_nChnfCgM-AsJTSbwQ1k&q=<?php echo urlencode($ubicacion); ?>"
-                        allowfullscreen>
-                    </iframe>
-                </div>
             </div>
         </div>
     </div>

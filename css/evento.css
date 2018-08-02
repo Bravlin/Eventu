@@ -7,15 +7,26 @@ ul.info-general{
     padding-left: 0;
 }
 
-.contenedor.mapa{
+.contenedor-nivel2{
+    max-width: 700px;
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.contenedor-mapa{
+    position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
 }
 
 .mapa{
+    position: absolute;
+    border: 0;
     top:0;
     left: 0;
-    width: 50%;
+    width: 100%;
     height: 100%;
+    /*max-width: 700px;
+    max-height: 250px;*/
 }
