@@ -12,6 +12,7 @@
     $ciudad_ok = true;
     $fecreal_ok = true;
     $categoria_ok = true;
+    $portada_ok = true;
     
     // Procesamiento del formulario
     if ($confirma == 'si'){
@@ -32,17 +33,23 @@
         $ciudad_ok = $codCiudad != "";
         $fecreal_ok = compararFechas($fecreal, date("Y-m-d h:i:sa")) > 0;
         $categoria_ok = $idCategoria != "";
+        $portada_ok = portadaCorrecta();
         if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok){
-            mysqli_query($db, "INSERT INTO direcciones (calle, altura, codCiudad) VALUES ('$calle', '$callealt', '$codCiudad');");
+            mysqli_query($db,
+                "INSERT INTO direcciones (calle, altura, codCiudad)
+                VALUES ('$calle', '$callealt', '$codCiudad');");
             $direccion = mysqli_insert_id($db);
             $idUsuario = $_SESSION['idUsuario'];
             $fechaCreac = date("Y-m-d h:i:sa");
-            mysqli_query($db, "INSERT INTO eventos (nombre, fechaCreac, fechaRealiz, descripcion, idDireccion, idCreador, idCategoria)
-            VALUES ('$nombre', '$fechaCreac', '$fecreal', '$descripcion', '$direccion', '$idUsuario', '$idCategoria');");
+            mysqli_query($db,
+                "INSERT INTO eventos (nombre, fechaCreac, fechaRealiz, descripcion, idDireccion, idCreador, idCategoria)
+                VALUES ('$nombre', '$fechaCreac', '$fecreal', '$descripcion', '$direccion', '$idUsuario', '$idCategoria');");
             $idEvento = mysqli_insert_id($db);
             $etiquetas = strtolower($etiquetas);
             $etiquetas = explode(" ", $etiquetas);
             actualizarEtiquetas($db, $etiquetas, $idEvento);
+            if (!empty($_FILES))
+                subirImagen($idEvento);
             header("location: home.php");
         }
     }
@@ -59,20 +66,40 @@
             return 0;
     }
     
+    function portadaCorrecta(){
+        if (empty($_FILES))
+            return true;
+        else {
+            $chequeo = getimagesize($_FILES['portada']['tmp_name']);
+            return $chequeo !== false && $_FILES['portada']['size'] <= 5000000;
+        }
+    }
+    
     // Esta funcion recibe un arreglo de etiquetas
     function actualizarEtiquetas($db, $etiquetas, $idEvento){
         foreach ($etiquetas as $nombreEtiqueta){
             $etiquetas_query = mysqli_query($db, "SELECT * FROM etiquetas WHERE nombre = '$nombreEtiqueta';");
             if (mysqli_num_rows($etiquetas_query) == 0){
-                mysqli_query($db, "INSERT INTO etiquetas (nombre) VALUES ('$nombreEtiqueta');");
+                mysqli_query($db,
+                    "INSERT INTO etiquetas (nombre)
+                    VALUES ('$nombreEtiqueta');");
                 $idEtiqueta = mysqli_insert_id($db);
             }
             else {
                 $etiqueta = mysqli_fetch_array($etiquetas_query);
                 $idEtiqueta = $etiqueta['idEtiqueta'];
             }
-            mysqli_query($db, "INSERT INTO etiquetas_eventos (idEtiqueta, idEvento) VALUES ('$idEtiqueta', '$idEvento');");
+            mysqli_query($db,
+                "INSERT INTO etiquetas_eventos (idEtiqueta, idEvento)
+                VALUES ('$idEtiqueta', '$idEvento');");
         }
+    }
+    
+    function subirImagen($idEvento){
+        $directorio = "media/portadas-eventos/";
+        $archivo_path = $directorio . $idEvento ."-p";
+        if (!move_uploaded_file($_FILES['portada']['tmp_name'], $archivo_path))
+            echo '<script language="javascript">alert("Error inesperado al tratar de subir la portada.");</script>'; 
     }
 ?>
 
@@ -88,9 +115,9 @@
     <div class="container-fluid">
         <div class="row">
             <?php require('barra-vertical.php'); ?>
-            <div class="col-12 col-md-10">
+            <div class="col-12 col-md-10 py-5">
                 <div class="form-container">
-                    <form class="formulario-principal color-blanco" method="POST">
+                    <form class="formulario-principal color-blanco" method="POST" enctype="multipart/form-data">
                         <h1 class="text-center">Agrega tu propio evento</h1>
                         <input type="hidden" name="confirma" value="si"/>
                         <div class="row cuerpo-form">
@@ -178,6 +205,14 @@
                                 <label for="etiquetas">Etiquetas</label>
                                 <input id="etiquetas" name="etiquetas" type="text" class="form-control" placeholder="Ingrese las etiquetas separadas por espacios"
                                 value="<?php if(isset($_REQUEST['etiquetas'])) echo $_REQUEST['etiquetas']; ?>">
+                            </div>
+                            <div class="col-12 elemento-form">
+                                <label for="portada">Portada</label>
+                                <input id="portada" name="portada" type="file" class="form-control">
+                                <?php
+                                    if (!$portada_ok)
+                                        echo '<p class="alerta">Archivo no válido.</p>';
+                                ?>
                             </div>
                         </div>
                         <div class="row justify-content-center">

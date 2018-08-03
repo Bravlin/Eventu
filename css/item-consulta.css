@@ -1,0 +1,7 @@
+.item-consulta .enlace-evento{
+    text-decoration: none;
+}
+
+.item-consulta .enlace-evento:hover{
+    color: var(--eventu-pink);
+}

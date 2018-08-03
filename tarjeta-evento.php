@@ -1,9 +1,17 @@
 <div class="card tarjeta-evento">
     <div class="card-header"><h5 class="eventu-pink-text"><?php echo $evento['nombreCateg']; ?></h3></div>
-    <img class="card-img-top" src="/src/imagenes/tedx-sydney-events-in-sydney-andy-dexterity-472x233.jpg" alt="Card image cap">
+    <img class="card-img-top" alt="Card image cap"
+        src=<?php
+            $portada = "media/portadas-eventos/" . $evento['idEvento'] . "-p";
+            if (file_exists($portada))
+                echo $portada;
+            else
+                echo "media/portadas-eventos/0-p";
+        ?>
+    >
     <div class="card-body eventu-red">
         <a class="enlace-evento" href="evento.php?idEvento=<?php echo $evento['idEvento']; ?>">
-            <h3 class="card-title"><?php echo $evento['nombreEvento']; ?></h5>
+            <h3 class="card-title"><?php echo $evento['nombreEvento']; ?></h3>
         </a>
         <p class="card-text"><?php echo $evento['descripcion']; ?></p>
     </div>

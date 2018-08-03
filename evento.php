@@ -34,7 +34,7 @@
     <div class="container-fluid">
         <div class="row">
             <?php require('barra-vertical.php'); ?>
-            <div class="col-12 col-md-10">
+            <div class="col-12 col-md-10 py-5">
                 <h5 class="categoria"><?php echo $evento['nombreCateg']; ?></h5>
                 <h1 class="nombre-evento"><?php echo $evento['nombreEvento']; ?></h1>
                 <p><?php echo $evento['descripcion']; ?></p>
