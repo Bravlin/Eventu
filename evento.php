@@ -1,7 +1,7 @@
 <?php
     $requiere_sesion = true;
-    require('sesion-redireccion.php');
-    require('db.php');
+    require('php-scripts/sesion-redireccion.php');
+    require('php-scripts/db.php');
     
     $idEvento = $_REQUEST['idEvento'];
     $eventos_query = mysqli_query($db,
@@ -25,15 +25,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require('head-navegacion.php'); ?>
+    <?php require('comun/head-navegacion.php'); ?>
     <title><?php echo $evento['nombreEvento']; ?> - Eventu</title>
     <link rel="stylesheet" type="text/css" href="css/evento.css">
 </head>
 <body>
-    <?php require ('navbar.php'); ?>
+    <?php require('comun/navbar.php'); ?>
     <div class="container-fluid">
         <div class="row">
-            <?php require('barra-vertical.php'); ?>
+            <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-10 py-5">
                 <h5 class="categoria"><?php echo $evento['nombreCateg']; ?></h5>
                 <h1 class="nombre-evento"><?php echo $evento['nombreEvento']; ?></h1>
@@ -59,7 +59,7 @@
                     </li>
                     <li>
                         <i class="fa fa-clock-o"></i>
-                        <?php echo date('d/m/Y H:i', strtotime($evento['fechaRealiz'])); ?>
+                        <?php echo date('H:i d/m/Y', strtotime($evento['fechaRealiz'])); ?>
                     </li>
                     <li>
                         <i class="fa fa-user-circle"></i>
@@ -84,6 +84,6 @@
             </div>
         </div>
     </div>
-    <?php require('barra-fondo.php'); ?>
+    <?php require('comun/barra-fondo.php'); ?>
 </body>
 </html>

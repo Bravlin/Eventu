@@ -1,7 +1,7 @@
 <?php
     $requiere_sesion = false;
-    require('sesion-redireccion.php');
-    require('db.php');
+    require('php-scripts/sesion-redireccion.php');
+    require('php-scripts/db.php');
     $msg_error = -1;
     $confirma = $_REQUEST['confirma'];
     if ($confirma == 'si'){
@@ -28,8 +28,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
-    <?php require('head-comun.php'); ?>
+    <title>Login - Eventu</title>
+    <?php require('comun/head-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
@@ -62,6 +62,6 @@
             </form>
         </div>
     </div>
-    <?php require('footer-simple.php'); ?>
+    <?php require('comun/footer-simple.php'); ?>
 </body>
 </html>

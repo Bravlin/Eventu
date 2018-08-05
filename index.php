@@ -1,13 +1,13 @@
 <?php
     $requiere_sesion = false;
-    require('sesion-redireccion.php');
+    require('php-scripts/sesion-redireccion.php');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Eventu</title>
-    <?php require('head-comun.php'); ?>
+    <?php require('comun/head-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/bienvenida.css">
 </head>
 <body>
@@ -34,6 +34,6 @@
             </div>
         </div>
     </div>
-    <?php require('footer-simple.php'); ?>
+    <?php require('comun/footer-simple.php'); ?>
 </body>
 </html>

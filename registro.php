@@ -1,7 +1,7 @@
 <?php
     $requiere_sesion = false;
-    require('sesion-redireccion.php');
-    require('db.php');
+    require('php-scripts/sesion-redireccion.php');
+    require('php-scripts/db.php');
     
     // Verificadores
     $confirma = $_REQUEST['confirma'];
@@ -72,8 +72,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registro</title>
-    <?php require('head-comun.php'); ?>
+    <title>Registro - Eventu</title>
+    <?php require('comun/head-comun.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/formulario.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -191,8 +191,26 @@
             </form>
         </div>
     </div>
-    <?php require('footer-simple.php'); ?>
+    <?php require('comun/footer-simple.php'); ?>
     
-    <script type="text/javascript" src="js/registro.js"></script>
+    <script type="text/javascript" src="js/manejador-ajax.js"></script>
+    <script>
+        /*global $*/
+        
+        $(document).ready(function(){
+            $('#contrasena, #contrasenaVerificacion').on('change', function(){
+                var contrasena = $('#contrasena').val();
+                var contrasenaCheck = $('#contrasenaVerificacion').val();
+                if (contrasena == contrasenaCheck){
+                   $('#contrasenaVerificacion').toggleClass('erroneo', false);
+                   $('#contrasenaVerificacion').toggleClass('valido', true);
+                }
+                else {
+                   $('#contrasenaVerificacion').toggleClass('valido', false);
+                   $('#contrasenaVerificacion').toggleClass('erroneo', true);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

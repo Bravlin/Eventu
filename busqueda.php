@@ -1,7 +1,7 @@
 <?php
     $requiere_sesion = true;
-    require('sesion-redireccion.php');
-    require('db.php');
+    require('php-scripts/sesion-redireccion.php');
+    require('php-scripts/db.php');
     
     $consulta = $_REQUEST['consulta'];
     switch ($_REQUEST['filtro']){
@@ -14,14 +14,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require('head-navegacion.php'); ?>
+    <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/item-consulta.css">
 </head>
 <body>
-    <?php require ('navbar.php'); ?>
+    <?php require('comun/navbar.php'); ?>
     <div class="container-fluid">
         <div class="row">
-            <?php require('barra-vertical.php'); ?>
+            <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-10 py-5">
                 <?php
                     $eventos_query = mysqli_query($db,
@@ -40,6 +40,6 @@
             </div>
         </div>
     </div>
-    <?php require('barra-fondo.php'); ?>
+    <?php require('comun/barra-fondo.php'); ?>
 </body>
 </html>

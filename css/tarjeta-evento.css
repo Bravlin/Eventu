@@ -20,6 +20,30 @@
     padding-bottom: 0;
 }
 
+.contenedor-portada{
+    position: relative;
+    color: white;
+}
+
+.organizador{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    width:100%;
+    bottom: 0;
+    font-size: 0.9em;
+}
+
+ul.info-evento{
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10%;
+}
+
+.info-item{
+    font-size: 0.9em;
+    margin-bottom: 2.5%;
+}
+
 .tarjeta-evento .enlace-evento{
     text-decoration: none;
     color: white;
