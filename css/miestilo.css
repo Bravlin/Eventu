@@ -4,8 +4,8 @@
 }
 
 :root{
-    --eventu-red: rgb(223, 69, 69);
-    --eventu-pink: rgb(238, 134, 134);
+    --eventu-red: rgb(255, 0, 51);
+    --eventu-pink: rgb(255, 147, 169);
 }
 
 .eventuButton{

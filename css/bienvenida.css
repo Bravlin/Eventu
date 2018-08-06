@@ -10,6 +10,8 @@
 .bienvenida::after{
     content: "";
     background-image: url("../src/imagenes/event-distribution.png");
+    background-size: cover;
+    background-position: center center;
     opacity: 0.5;
     top: 0;
     left: 0;

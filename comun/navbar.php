@@ -11,10 +11,10 @@
     <div class="collapse navbar-collapse" id="navegacionPrincipal">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="">Categorías</a>
+                <a class="nav-link" href="/categorias.php">Categorías</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Notificaciones</a>
+                <a class="nav-link" href="/etiquetas.php">Etiquetas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">Mi perfil</a>

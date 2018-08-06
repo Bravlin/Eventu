@@ -1,5 +1,5 @@
 .contenedor-pagina{
-    background-color: rgb(223, 69, 69);
+    background-color: var(--eventu-red);
     padding-top: 7%;
     padding-bottom: 7%;
 }

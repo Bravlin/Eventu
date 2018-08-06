@@ -6,18 +6,22 @@
 }
 
 .eventu-red{
-    background-color: rgb(223, 69, 69);
+    background-color: var(--eventu-red);
     color: white;
 }
 
 .eventu-pink-text{
-    color: rgb(238, 134, 134);
+    color: var(--eventu-pink);
 }
 
 .card-header{
     background-color: white;
     padding-top: 0.5em;
     padding-bottom: 0;
+}
+
+.card-header a:hover{
+    color: var(--eventu-pink);
 }
 
 .contenedor-portada{
@@ -50,6 +54,15 @@ ul.info-evento{
 }
 
 .tarjeta-evento .enlace-evento:hover{
+    color: var(--eventu-pink);
+}
+
+.tarjeta-evento .etiqueta{
+    color: white;
+    text-decoration: none;
+}
+
+.tarjeta-evento .etiqueta:hover{
     color: var(--eventu-pink);
 }
 

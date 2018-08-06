@@ -34,9 +34,22 @@
     <div class="container-fluid">
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
-            <div class="col-12 col-md-10 py-5">
+            <div class="col-12 col-md-10 py-5 px-md-5">
                 <h5 class="categoria"><?php echo $evento['nombreCateg']; ?></h5>
-                <h1 class="nombre-evento"><?php echo $evento['nombreEvento']; ?></h1>
+                <div class="contenedor-portada mb-5">
+                    <img class="portada" alt="portada"
+                        src=<?php
+                                $portada = "media/portadas-eventos/" . $evento['idEvento'] . "-p";
+                                if (file_exists($portada))
+                                    echo $portada;
+                                else
+                                    echo "media/portadas-eventos/0-p";
+                            ?>
+                    >
+                    <div class="contenedor-titulo px-1 px-md-3">
+                        <h1 class="nombre-evento"><?php echo $evento['nombreEvento']; ?></h1>
+                    </div>
+                </div>
                 <p><?php echo $evento['descripcion']; ?></p>
                 <ul class="info-general">
                     <li>

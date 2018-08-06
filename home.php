@@ -26,13 +26,13 @@
                             ciudades.nombre AS nombreCiudad,
                             provincias.nombre AS nombreProvincia,
                             u.nombres AS nombresCread, u.apellidos AS apellidosCread,
-                            categorias.nombre AS nombreCateg
+                            cat.nombre AS nombreCateg, cat.idCategoria
                             FROM eventos e
                             INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
                             INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                             INNER JOIN usuarios u ON u.idUsuario = e.idCreador
-                            INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
+                            INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
                             WHERE dir.codCiudad = '$codCiudad'
                             ORDER BY e.fechaRealiz ASC;");
                         while ($evento = mysqli_fetch_array($eventos_query))

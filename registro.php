@@ -2,6 +2,7 @@
     $requiere_sesion = false;
     require('php-scripts/sesion-redireccion.php');
     require('php-scripts/db.php');
+    require('php-scripts/funciones-comunes.php');
     
     // Verificadores
     $confirma = $_REQUEST['confirma'];
@@ -45,18 +46,6 @@
             VALUES ('$nombres', '$apellidos', '$fecnac', '$email', '$contrasena', '$direccion');");
             header("location: login.php");
         }
-    }
-    
-    // Esta funcion recibe dos strings de fechas
-    function compararFechas($datetime1, $datetime2){
-        $datetime_obj1 = new DateTime($datetime1);
-        $datetime_obj2 = new DateTime($datetime2);
-        if ($datetime_obj1 > $datetime_obj2)
-            return 1;
-        elseif ($datetime_obj1 < $datetime_obj2)
-            return -1;
-        else
-            return 0;
     }
     
     function validaEmail($email, $db){

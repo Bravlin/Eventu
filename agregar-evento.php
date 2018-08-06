@@ -2,6 +2,7 @@
     $requiere_sesion = true;
     require('php-scripts/sesion-redireccion.php');
     require('php-scripts/db.php');
+    require('php-scripts/funciones-comunes.php');
     
     // Variables de control
     $confirma = $_REQUEST['confirma'];
@@ -33,7 +34,7 @@
         $ciudad_ok = $codCiudad != "";
         $fecreal_ok = compararFechas($fecreal, date("Y-m-d h:i:sa")) > 0;
         $categoria_ok = $idCategoria != "";
-        $portada_ok = portadaCorrecta();
+        $portada_ok = imagenCorrecta('portada');
         if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok){
             mysqli_query($db,
                 "INSERT INTO direcciones (calle, altura, codCiudad)
@@ -48,30 +49,9 @@
             $etiquetas = strtolower($etiquetas);
             $etiquetas = explode(" ", $etiquetas);
             actualizarEtiquetas($db, $etiquetas, $idEvento);
-            if (!empty($_FILES))
+            if (is_uploaded_file($_FILES['portada']['tmp_name']))
                 subirImagen($idEvento);
             header("location: home.php");
-        }
-    }
-    
-    // Esta funcion recibe dos strings de fechas
-    function compararFechas($datetime1, $datetime2){
-        $datetime_obj1 = new DateTime($datetime1);
-        $datetime_obj2 = new DateTime($datetime2);
-        if ($datetime_obj1 > $datetime_obj2)
-            return 1;
-        elseif ($datetime_obj1 < $datetime_obj2)
-            return -1;
-        else
-            return 0;
-    }
-    
-    function portadaCorrecta(){
-        if (empty($_FILES))
-            return true;
-        else {
-            $chequeo = getimagesize($_FILES['portada']['tmp_name']);
-            return $chequeo !== false && $_FILES['portada']['size'] <= 5000000;
         }
     }
     
