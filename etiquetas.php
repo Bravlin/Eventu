@@ -20,7 +20,8 @@
                     <?php
                         $etiquetas_query = mysqli_query($db, "SELECT * FROM etiquetas ORDER BY nombre ASC;");
                         while ($etiqueta = mysqli_fetch_array($etiquetas_query))
-                            echo '<li class="px-0 mb-2 col-12 col-sm-6 col-md-4 col-lg-2"><a href="">' . $etiqueta['nombre'] . '</a></li>';
+                            echo '<li class="px-0 mb-2 col-12 col-sm-6 col-md-4 col-lg-2">
+                                <a href="catalogo.php?modo=etiqueta&id='.$etiqueta['idEtiqueta'].'">' . $etiqueta['nombre'] . '</a></li>';
                     ?>
                 </ul>
             </div>

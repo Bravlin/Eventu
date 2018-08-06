@@ -17,7 +17,7 @@
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-10 py-5">
-                <div class="card-columns">
+                <div class="row">
                     <?php
                         $codCiudad = $_SESSION['codCiudad'];
                         $eventos_query = mysqli_query($db,

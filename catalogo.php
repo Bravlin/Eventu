@@ -66,15 +66,17 @@
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-10 py-5">
-                <?php
-                    if ($titulo == "")
-                        echo "<p>Error</p>";
-                    else {
-                        $eventos_query = mysqli_query($db, $consulta);
-                        while ($evento = mysqli_fetch_array($eventos_query))
-                            require('item-consulta.php');
-                    }
-                ?>
+                <div class="row">
+                    <?php
+                        if ($titulo == "")
+                            echo "<p>Error</p>";
+                        else {
+                            $eventos_query = mysqli_query($db, $consulta);
+                            while ($evento = mysqli_fetch_array($eventos_query))
+                                require('item-consulta.php');
+                        }
+                    ?>
+                </div>
             </div>
         </div>
     </div>

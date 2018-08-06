@@ -71,8 +71,13 @@
                         </div>
                     </li>
                     <li>
-                        <i class="fa fa-clock-o"></i>
-                        <?php echo date('H:i d/m/Y', strtotime($evento['fechaRealiz'])); ?>
+                        <i class="fa fa-calendar"></i>
+                        <?php
+                            $fechaHora = strtotime($evento['fechaRealiz']);
+                            echo date('d/m/Y', $fechaHora);
+                        ?>
+                        <i class="fa fa-clock-o pl-3"></i>
+                        <?php echo date('H:i', $fechaHora); ?>
                     </li>
                     <li>
                         <i class="fa fa-user-circle"></i>
