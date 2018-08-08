@@ -1,4 +1,8 @@
-<div class="col-12 col-sm-6 col-lg-4 mb-5">
+<?php
+    $enlaceEvento = "evento.php?idEvento=" . $evento['idEvento'];
+?>
+
+<div class="col-12 col-sm-6 col-lg-4 mb-5 d-flex align-items-stretch">
     <div class="card tarjeta-evento">
         <div class="card-header">
             <a href="catalogo.php?modo=categoria&id=<?php echo $evento['idCategoria']; ?>">
@@ -6,22 +10,24 @@
             </a>
         </div>
         <div class="contenedor-portada">
-            <img class="card-img-top" alt="Card image cap"
-                src=<?php
-                    $portada = "media/portadas-eventos/" . $evento['idEvento'] . "-p";
-                    if (file_exists($portada))
-                        echo $portada;
-                    else
-                        echo "media/portadas-eventos/0-p";
-                ?>
-            >
+            <a href="<?php echo $enlaceEvento; ?>">
+                <img class="card-img-top" alt="Card image cap"
+                    src=<?php
+                        $portada = "media/portadas-eventos/" . $evento['idEvento'] . "-p";
+                        if (file_exists($portada))
+                            echo $portada;
+                        else
+                            echo "media/portadas-eventos/0-p";
+                    ?>
+                >
+            </a>
             <div class="organizador px-2">
                 <i class="fa fa-user-circle eventu-pink-text"></i>
                 <?php echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?>
             </div>
         </div>
         <div class="card-body eventu-red">
-            <a class="enlace-evento" href="evento.php?idEvento=<?php echo $evento['idEvento']; ?>">
+            <a class="enlace-evento" href="<?php echo $enlaceEvento; ?>">
                 <h3 class="card-title"><?php echo $evento['nombreEvento']; ?></h3>
             </a>
             <ul class="info-evento">

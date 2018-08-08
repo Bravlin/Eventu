@@ -15,16 +15,6 @@
     background-color: var(--eventu-red);
 }
 
-.formulario-principal{
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    padding-left: 1em;
-    padding-right: 1em;
-}
-
 .formulario-principal h1{
     color: rgb(92, 92, 92);
     padding-bottom: 5%;

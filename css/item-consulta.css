@@ -1,7 +1,28 @@
+.contenedor-portada{
+    position: relative;
+    color: white;
+}
+
+.contenedor-nombre{
+    background-color: rgba(255, 0, 1, 0.7);
+    position: absolute;
+    bottom: 0;
+    width:100%;
+}
+
 .item-consulta .enlace-evento{
     text-decoration: none;
+    color: white;
 }
 
 .item-consulta .enlace-evento:hover{
     color: var(--eventu-pink);
+}
+
+.item-consulta i{
+    color: var(--eventu-pink);
+}
+
+.contenedor-info{
+    list-style-type: none;
 }

@@ -1,7 +1,5 @@
 .contenedor-pagina{
     background-color: var(--eventu-red);
-    padding-top: 7%;
-    padding-bottom: 7%;
 }
 
 .form-container{
@@ -10,16 +8,6 @@
 
 form{
     background-color: white;
-    width: 60%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
-    padding-bottom: 5%;
-}
-
-form *{
-    margin-left: auto;
-    margin-right: auto;
 }
 
 form h1{
@@ -28,22 +16,6 @@ form h1{
     padding-left: 5%;
     padding-right: 5%;
     font-size: 2em;
-}
-
-.form-control{
-    max-width: 300px;
-    margin-bottom: 20px;
-}
-
-form div{
-    display: flex;
-    max-width: 300px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.bis{
-    margin-top: 2.5%;
 }
 
 .alerta{

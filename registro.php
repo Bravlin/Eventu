@@ -74,9 +74,9 @@
             </div>
         </header>
     </div>
-    <div class="contenedor-pagina color-eventu-red">
-        <div class="form-container">
-            <form class="formulario-principal color-blanco" method="POST">
+    <div class="contenedor-pagina row justify-content-center color-eventu-red">
+        <div class="form-container col-10 col-lg-8">
+            <form class="formulario-principal color-blanco py-5 px-1 px-sm-3" method="POST">
                 <h1 class="text-center">¡Únete para no volver a perderte un evento!</h1>
                 <input type="hidden" name="confirma" value="si"/>
                 <div class="row cuerpo-form">

@@ -10,13 +10,13 @@
         ciudades.nombre AS nombreCiudad,
         provincias.nombre AS nombreProvincia,
         u.nombres AS nombresCread, u.apellidos AS apellidosCread,
-        categorias.nombre AS nombreCateg
+        cat.nombre AS nombreCateg, cat.idCategoria
         FROM eventos e
         INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
         INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
         INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
         INNER JOIN usuarios u ON u.idUsuario = e.idCreador
-        INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
+        INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
         WHERE e.idEvento = '$idEvento';");
     if (mysqli_num_rows($eventos_query) == 1)
         $evento = mysqli_fetch_array($eventos_query);
@@ -35,7 +35,9 @@
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-10 py-5 px-md-5">
-                <h5 class="categoria"><?php echo $evento['nombreCateg']; ?></h5>
+                <a href="catalogo.php?modo=categoria&id=<?php echo $evento['idCategoria']; ?>">
+                    <h5 class="categoria"><?php echo $evento['nombreCateg']; ?></h5>
+                </a>
                 <div class="contenedor-portada mb-5">
                     <img class="portada" alt="portada"
                         src=<?php
