@@ -1,5 +1,6 @@
 <?php
     $requiere_sesion = true;
+    $solo_administrador = false;
     require('php-scripts/sesion-redireccion.php');
     require('php-scripts/db.php');
     require('php-scripts/funciones-comunes.php');
@@ -95,7 +96,7 @@
     <div class="container-fluid">
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
-            <div class="col-12 col-md-10 py-5 row justify-content-center">
+            <div class="col-12 col-md-9 col-lg-10 py-5 row justify-content-center">
                 <div class="form-container col-10 col-lg-8 py-5 px-1 px-sm-3">
                     <form class="formulario-principal color-blanco" method="POST" enctype="multipart/form-data">
                         <h1 class="text-center">Agrega tu propio evento</h1>

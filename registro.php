@@ -69,7 +69,7 @@
 <body>
     <div class="container-fluid">
         <header>
-            <div class="logo">
+            <div class="logo mt-0">
                 <img src="src/imagenes/logo.svg">Eventu
             </div>
         </header>
@@ -175,7 +175,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <button class="btn eventuButton" type="submit">Enviar</button>
+                    <button id="enviar" class="btn eventuButton" type="submit" disabled>Enviar</button>
                 </div>
             </form>
         </div>
@@ -193,10 +193,12 @@
                 if (contrasena == contrasenaCheck){
                    $('#contrasenaVerificacion').toggleClass('erroneo', false);
                    $('#contrasenaVerificacion').toggleClass('valido', true);
+                   $('#enviar').prop("disabled", false);
                 }
                 else {
                    $('#contrasenaVerificacion').toggleClass('valido', false);
                    $('#contrasenaVerificacion').toggleClass('erroneo', true);
+                   $('#enviar').prop("disabled", true);
                 }
             });
         });

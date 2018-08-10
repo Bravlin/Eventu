@@ -3,11 +3,28 @@
     --eventu-pink: rgb(255, 147, 169);
 }
 
-.minavbar{
+.eventu-button{
+    color: white;
     background-color: var(--eventu-red);
+    border: none;
+}
+
+.eventu-button:hover{
+    background-color: var(--eventu-pink);
+}
+
+.minavbar{
     padding-top: 0;
     padding-bottom: 0;
     box-shadow: 0 0 1em grey;
+}
+
+.minavbar.comun{
+    background-color: var(--eventu-red);
+}
+
+.minavbar.gestion{
+    background-color: black;
 }
 
 .minavbar .navbar-toggler{
@@ -59,14 +76,18 @@
     background-color: rgb(240, 240, 240);
 }
 
+.barra-vertical{
+    height: 100%;
+    position: sticky;
+    top: 10%;
+}
+
 .barra-vertical ul{
     list-style-type: none;
-    padding-left: 1em;
 }
 
 .barra-vertical li{
-    font-size: 1.1em;
-    margin-bottom: 1.5em;
+    font-size: 1em;
 }
 
 .barra-vertical a, .barra-fondo a{

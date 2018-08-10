@@ -12,13 +12,13 @@
         <div class="contenedor-portada">
             <a href="<?php echo $enlaceEvento; ?>">
                 <img class="card-img-top" alt="Card image cap"
-                    src=<?php
-                        $portada = "media/portadas-eventos/" . $evento['idEvento'] . "-p";
-                        if (file_exists($portada))
-                            echo $portada;
-                        else
-                            echo "media/portadas-eventos/0-p";
-                    ?>
+                        src=<?php
+                            $portada = "../media/portadas-eventos/" . $evento['idEvento'] . "-p";
+                            if (file_exists($portada))
+                                echo $portada;
+                            else
+                                echo "../media/portadas-eventos/0-p";
+                        ?>
                 >
             </a>
             <div class="organizador px-3">

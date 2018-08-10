@@ -1,12 +1,12 @@
 <?php
     $requiere_sesion = true;
-    $solo_administrador = false;
-    require('php-scripts/sesion-redireccion.php');
-    require('php-scripts/db.php');
+    $solo_administrador = true;
+    require('../php-scripts/sesion-redireccion.php');
+    require('../php-scripts/db.php');
     
     $idEvento = $_REQUEST['idEvento'];
     $eventos_query = mysqli_query($db,
-        "SELECT e.idEvento, e.nombre AS nombreEvento, e.descripcion, e.fechaRealiz,
+        "SELECT e.idEvento, e.nombre AS nombreEvento, e.descripcion, e.fechaRealiz, e.estado,
         dir.calle, dir.altura,
         ciudades.nombre AS nombreCiudad,
         provincias.nombre AS nombreProvincia,
@@ -26,9 +26,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php require('comun/head-navegacion.php'); ?>
     <title><?php echo $evento['nombreEvento']; ?> - Eventu</title>
-    <link rel="stylesheet" type="text/css" href="css/evento.css">
+    <?php require('comun/head-navegacion.php'); ?>
+    <link rel="stylesheet" type="text/css" href="/css/evento.css">
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
@@ -42,12 +42,12 @@
                 <div class="contenedor-portada mb-5">
                     <img class="portada" alt="portada"
                         src=<?php
-                        $portada = "media/portadas-eventos/" . $evento['idEvento'] . "-p";
-                        if (file_exists($portada))
-                            echo $portada;
-                        else
-                            echo "media/portadas-eventos/0-p";
-                    ?>
+                            $portada = "../media/portadas-eventos/" . $evento['idEvento'] . "-p";
+                            if (file_exists($portada))
+                                echo $portada;
+                            else
+                                echo "../media/portadas-eventos/0-p";
+                        ?>
                     >
                     <div class="contenedor-titulo px-1 px-md-3">
                         <h1 class="nombre-evento"><?php echo $evento['nombreEvento']; ?></h1>
@@ -92,18 +92,51 @@
                             <b>
                                 <?php
                                     $etiquetas_query = mysqli_query($db,
-                                        "SELECT et.nombre, et.idEtiqueta
+                                        "SELECT et.nombre
                                         FROM etiquetas et
                                         INNER JOIN etiquetas_eventos et_ev ON et.idEtiqueta = et_ev.idEtiqueta
                                         WHERE et_ev.idEvento = '$idEvento'
                                         ORDER BY et.nombre ASC;");
                                     while ($etiqueta = mysqli_fetch_array($etiquetas_query))
-                                        echo '<a class="mr-1" href="catalogo.php?modo=etiqueta&id='.$etiqueta['idEtiqueta'].'">' . $etiqueta['nombre'] . '</a>';
+                                        echo $etiqueta['nombre'].' ';
                                 ?>
                             </b>
                         </div>
-                        <div class="my-auto mx-auto">
-                            <button class="eventu-button inscribirse rounded px-3">Inscribirse</button>
+                        <div class="text-center my-auto mx-auto">
+                            <p id="estado">
+                                <?php
+                                    switch ($evento['estado']){
+                                        case "P":
+                                            echo "Pendiente de aprobación";
+                                            break;
+                                        case "A":
+                                            echo "Aprobado";
+                                            break;
+                                        case "R":
+                                            echo "Rechazado";
+                                            break;
+                                    }
+                                ?>
+                            </p>
+                            <?php
+                                switch ($evento['estado']){
+                                    case 'P':
+                                        echo '<button type="button" id="aceptar" class="btn btn-success rounded px-3 mr-2">Aceptar</button>';
+                                        echo '<button type="button" id="rechazar" class="btn btn-danger rounded px-3">Rechazar</button>';
+                                        echo '<button type="button" id="modificar" class="btn btn-success rounded px-3 mr-2" hidden>Modificar</button>';
+                                        echo '<button type="button" id="eliminar" class="btn btn-danger rounded px-3" hidden>Eliminar</button>';
+                                        break;
+                                    case 'A':
+                                        echo '<button type="button" id="modificar" class="btn btn-success rounded px-3 mr-2">Modificar</button>';
+                                        echo '<button type="button" id="eliminar" class="btn btn-danger rounded px-3">Eliminar</button>';
+                                        break;
+                                    case 'R':
+                                        echo '<button type="button" id="aceptar" class="btn btn-success rounded px-3 mr-2">Aceptar</button>';
+                                        echo '<button type="button" id="modificar" class="btn btn-success rounded px-3 mr-2" hidden>Modificar</button>';
+                                        echo '<button type="button" id="eliminar" class="btn btn-danger rounded px-3">Eliminar</button>';
+                                        break;
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -111,5 +144,8 @@
         </div>
     </div>
     <?php require('comun/barra-fondo.php'); ?>
+    
+    <div id="idEvento" valor="<?php echo $idEvento; ?>" hidden></div>
+    <script type="text/javascript" src="js/handler-eventos.js"></script>
 </body>
 </html>

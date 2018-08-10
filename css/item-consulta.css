@@ -4,7 +4,7 @@
 }
 
 .contenedor-nombre{
-    background-color: rgba(255, 0, 1, 0.7);
+    background-color: var(--eventu-red);
     position: absolute;
     bottom: 0;
     width:100%;
@@ -25,4 +25,18 @@
 
 .contenedor-info{
     list-style-type: none;
+}
+
+.item-consulta .card-body{
+    background-color: rgb(245, 245, 245);
+}
+
+img{
+    object-fit: cover;
+}
+
+@media screen and (min-width: 576px){
+    img{
+        min-height: 160px;
+    }
 }

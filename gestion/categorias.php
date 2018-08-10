@@ -1,8 +1,8 @@
 <?php
     $requiere_sesion = true;
-    $solo_administrador = false;
-    require('php-scripts/sesion-redireccion.php');
-    require('php-scripts/db.php');
+    $solo_administrador = true;
+    require('../php-scripts/sesion-redireccion.php');
+    require('../php-scripts/db.php');
 ?>
 
 <!DOCTYPE html>

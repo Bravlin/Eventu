@@ -1,8 +1,8 @@
 <?php
     $requiere_sesion = true;
-    $solo_administrador = false;
-    require('php-scripts/sesion-redireccion.php');
-    require('php-scripts/db.php');
+    $solo_administrador = true;
+    require('../php-scripts/sesion-redireccion.php');
+    require('../php-scripts/db.php');
     
     $modo = $_REQUEST['modo'];
     $id = $_REQUEST['id'];
@@ -60,7 +60,7 @@
 <head>
     <title><?php echo ($titulo != "") ? $titulo : 'Error'; ?> - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
-    <link rel="stylesheet" type="text/css" href="css/item-consulta.css">
+    <link rel="stylesheet" type="text/css" href="/css/item-consulta.css">
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>

@@ -1,16 +1,16 @@
 <?php
     $requiere_sesion = true;
-    $solo_administrador = false;
-    require('php-scripts/sesion-redireccion.php');
-    require('php-scripts/db.php');
+    $solo_administrador = true;
+    require('../php-scripts/sesion-redireccion.php');
+    require('../php-scripts/db.php');
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Eventu</title>
+    <title>Admin - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
-    <link rel="stylesheet" type="text/css" href="css/tarjeta-evento.css">
+    <link rel="stylesheet" type="text/css" href="/css/tarjeta-evento.css">
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
@@ -18,9 +18,9 @@
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-9 col-lg-10 py-5">
+                <h1 class="mb-5">Pendientes de aprobación</h1>
                 <div class="row">
                     <?php
-                        $codCiudad = $_SESSION['codCiudad'];
                         $eventos_query = mysqli_query($db,
                             "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
                             dir.calle, dir.altura,
@@ -34,8 +34,8 @@
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                             INNER JOIN usuarios u ON u.idUsuario = e.idCreador
                             INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
-                            WHERE dir.codCiudad = '$codCiudad'
-                            ORDER BY e.fechaRealiz ASC;");
+                            WHERE e.estado = 'pendiente'
+                            ORDER BY e.fechaCreac ASC;");
                         while ($evento = mysqli_fetch_array($eventos_query))
                             require('tarjeta-evento.php');
                     ?>

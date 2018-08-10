@@ -15,8 +15,8 @@
 }
 
 .eventuButton:hover{
-    background-color: var(--eventu-pink);
     color: white;
+    background-color: var(--eventu-pink);
 }
 
 .logo{

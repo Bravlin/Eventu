@@ -9,16 +9,21 @@
         $contrasena = $_REQUEST['contrasena'];
         $contrasena = md5($contrasena);
         $usuario_query = mysqli_query($db,
-            "SELECT usuarios.idUsuario, direcciones.codCiudad
-            FROM usuarios INNER JOIN direcciones
-            ON usuarios.idDireccion = direcciones.idDireccion
-            WHERE usuarios.email = '$email' AND usuarios.clave = '$contrasena';");
+            "SELECT u.idUsuario, u.tipo,
+            direcciones.codCiudad
+            FROM usuarios u INNER JOIN direcciones
+            ON u.idDireccion = direcciones.idDireccion
+            WHERE u.email = '$email' AND u.clave = '$contrasena';");
         if (mysqli_num_rows($usuario_query) == 1){
             $usuario = mysqli_fetch_array($usuario_query);
             $_SESSION['idUsuario'] = $usuario['idUsuario'];
+            $_SESSION['tipo'] = $usuario['tipo'];
             $_SESSION['codCiudad'] = $usuario['codCiudad'];
             session_write_close();
-            header("location: home.php");
+            if ($_SESSION['tipo'] == 'A')
+                header("location: gestion/home.php");
+            else
+                header("location: home.php");
         }
         else
             $msg_error = 1;
@@ -35,7 +40,7 @@
 <body>
     <div class="container-fluid">
         <header>
-            <div class="logo">
+            <div class="logo mt-0">
                 <img src="src/imagenes/logo.svg">Eventu
             </div>
         </header>
