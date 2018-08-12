@@ -22,11 +22,11 @@
                     <?php
                         $codCiudad = $_SESSION['codCiudad'];
                         $eventos_query = mysqli_query($db,
-                            "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
+                            "SELECT DISTINCT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
                             dir.calle, dir.altura,
                             ciudades.nombre AS nombreCiudad,
                             provincias.nombre AS nombreProvincia,
-                            u.nombres AS nombresCread, u.apellidos AS apellidosCread,
+                            u.nombres AS nombresCread, u.apellidos AS apellidosCread, u.idUsuario AS idCread,
                             cat.nombre AS nombreCateg, cat.idCategoria
                             FROM eventos e
                             INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
@@ -34,7 +34,9 @@
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                             INNER JOIN usuarios u ON u.idUsuario = e.idCreador
                             INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
-                            WHERE dir.codCiudad = '$codCiudad'
+                            INNER JOIN etiquetas_eventos et_e ON et_e.idEvento = e.idEvento
+                            INNER JOIN etiquetas_usuarios et_u ON et_u.idEtiqueta = et_e.idEtiqueta
+                            WHERE et_u.idUsuario = '".$_SESSION['idUsuario']."'
                             ORDER BY e.fechaRealiz ASC;");
                         while ($evento = mysqli_fetch_array($eventos_query))
                             require('tarjeta-evento.php');

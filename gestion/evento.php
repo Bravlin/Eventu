@@ -103,34 +103,22 @@
                             </b>
                         </div>
                         <div class="text-center my-auto mx-auto">
-                            <p id="estado">
-                                <?php
-                                    switch ($evento['estado']){
-                                        case "P":
-                                            echo "Pendiente de aprobación";
-                                            break;
-                                        case "A":
-                                            echo "Aprobado";
-                                            break;
-                                        case "R":
-                                            echo "Rechazado";
-                                            break;
-                                    }
-                                ?>
-                            </p>
                             <?php
                                 switch ($evento['estado']){
-                                    case 'P':
+                                    case 'pendiente':
+                                        echo '<p id="estado">Pendiente de aprobación</p>';
                                         echo '<button type="button" id="aceptar" class="btn btn-success rounded px-3 mr-2">Aceptar</button>';
                                         echo '<button type="button" id="rechazar" class="btn btn-danger rounded px-3">Rechazar</button>';
                                         echo '<button type="button" id="modificar" class="btn btn-success rounded px-3 mr-2" hidden>Modificar</button>';
                                         echo '<button type="button" id="eliminar" class="btn btn-danger rounded px-3" hidden>Eliminar</button>';
                                         break;
-                                    case 'A':
+                                    case 'aprobado':
+                                        echo '<p id="estado">Aprobado</p>';
                                         echo '<button type="button" id="modificar" class="btn btn-success rounded px-3 mr-2">Modificar</button>';
                                         echo '<button type="button" id="eliminar" class="btn btn-danger rounded px-3">Eliminar</button>';
                                         break;
-                                    case 'R':
+                                    case 'rechazado':
+                                        echo '<p id="estado">Rechazado</p>';
                                         echo '<button type="button" id="aceptar" class="btn btn-success rounded px-3 mr-2">Aceptar</button>';
                                         echo '<button type="button" id="modificar" class="btn btn-success rounded px-3 mr-2" hidden>Modificar</button>';
                                         echo '<button type="button" id="eliminar" class="btn btn-danger rounded px-3">Eliminar</button>';

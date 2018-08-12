@@ -1,11 +1,8 @@
 <?php
     require('../../php-scripts/db.php');
+    $estados_validos = array('aprobado', 'rechazado', 'pendiente');
     $idEvento = $_REQUEST['idEvento'];
     $accion = $_REQUEST['accion'];
-    switch ($accion){
-        case 'aceptar':
-            $estado = 'A';
-            break;
-    }
-    mysqli_query($db, "UPDATE eventos SET estado = '$estado' WHERE idEvento = '$idEvento';");
+    if (in_array($accion, $estados_validos))
+        mysqli_query($db, "UPDATE eventos SET estado = '$accion' WHERE idEvento = '$idEvento';");
 ?>

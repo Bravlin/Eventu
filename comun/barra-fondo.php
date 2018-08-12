@@ -8,6 +8,12 @@
                 </a>
             </div>
             <div class="col-3">
+                <a href="">
+                    <i class="fa fa-bell"></i>
+                    <p>Notificaciones</p>
+                </a>
+            </div>
+            <div class="col-3">
                 <a href="/agregar-evento.php">
                     <i class="fa fa-calendar-plus-o"></i>
                     <p>+ evento</p>
@@ -17,12 +23,6 @@
                 <a href="">
                     <i class="fa fa-calendar"></i>
                     <p>Agenda</p>
-                </a>
-            </div>
-            <div class="col-3">
-                <a href="/php-scripts/sesion-baja.php">
-                    <i class="fa fa-sign-out"></i>
-                    <p>Salir</p>
                 </a>
             </div>
         </div>

@@ -30,6 +30,14 @@
     font-size: 0.9em;
 }
 
+.fecha-creac{
+    background-color: rgba(150, 150, 150, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.9em;
+}
+
 ul.info-evento{
     list-style-type: none;
     padding-left: 0;

@@ -23,7 +23,9 @@
             </a>
             <div class="organizador px-3">
                 <i class="fa fa-user-circle"></i>
-                <?php echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?>
+                <a class="enlace-evento" href="/perfil.php?idUsuario=<?php echo $evento['idCread']; ?>">
+                    <?php echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?>
+                </a>
             </div>
         </div>
         <div class="card-body eventu-red">
@@ -47,6 +49,7 @@
                 <li class="info-item">
                     <i class="fa fa-hashtag"></i>
                     <?php
+                        $idEvento = $evento['idEvento'];
                         $etiquetas_query = mysqli_query($db,
                             "SELECT et.idEtiqueta, et.nombre
                             FROM etiquetas et

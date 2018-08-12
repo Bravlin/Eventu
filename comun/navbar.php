@@ -17,7 +17,7 @@
                 <a class="nav-link" href="/etiquetas.php">Etiquetas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Mi perfil</a>
+                <a class="nav-link" href="/perfil.php?idUsuario=<?php echo $_SESSION['idUsuario']; ?>">Mi perfil</a>
             </li>
         </ul>
     </div>

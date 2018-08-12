@@ -25,6 +25,10 @@
         <div class="card-body">
             <ul class="contenedor-info pl-0">
                 <li class="mb-2">
+                    <i class="fa fa-plus"></i>
+                    <?php echo $evento['fechaCreac']?>
+                </li>
+                <li class="mb-2">
                     <i class="fa fa-map-marker eventu-pink-text"></i>
                     <?php echo $evento['calle'].' '.$evento['altura'].', '.$evento['nombreCiudad'].', '.$evento['nombreProvincia']; ?>
                 </li>

@@ -10,6 +10,10 @@
             </a>
         </div>
         <div class="contenedor-portada">
+            <div class="fecha-creac px-3">
+                <i class="fa fa-plus"></i>
+                <?php echo $evento['fechaCreac']?>
+            </div>
             <a href="<?php echo $enlaceEvento; ?>">
                 <img class="card-img-top" alt="Card image cap"
                         src=<?php
@@ -47,6 +51,7 @@
                 <li class="info-item">
                     <i class="fa fa-hashtag"></i>
                     <?php
+                        $idEvento = $evento['idEvento'];
                         $etiquetas_query = mysqli_query($db,
                             "SELECT et.idEtiqueta, et.nombre
                             FROM etiquetas et

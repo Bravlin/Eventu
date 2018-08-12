@@ -12,7 +12,8 @@
             if (mysqli_num_rows($query) != 1)
                 $titulo = "";
             else {
-                $titulo = mysqli_fetch_array($query)['nombre'];
+                $nombre = mysqli_fetch_array($query)['nombre'];
+                $titulo = '<h1 class="text-center categoria">' . $nombre . '</h1>';
                 $consulta = 
                     "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
                     dir.calle, dir.altura,
@@ -33,7 +34,19 @@
             if (mysqli_num_rows($query) != 1)
                 $titulo = "";
             else {
-                $titulo = '#' . mysqli_fetch_array($query)['nombre'];
+                $nombre = mysqli_fetch_array($query)['nombre'];
+                $sigue_query = mysqli_query($db,
+                    "SELECT * FROM etiquetas_usuarios WHERE idEtiqueta = '$id' AND idUsuario = '".$_SESSION['idUsuario']."';");
+                if (mysqli_num_rows($sigue_query) == 0)
+                    $titulo = '<h1 class="text-center text-primary">#' . $nombre .
+                        '<span><button type="button" id="seguir" class="btn btn-primary ml-3">Seguir</button></span>
+                        <span><button hidden type="button" id="dejar-seguir" class="btn btn-outline-primary ml-3">Dejar de seguir</button></span>
+                        </h1>';
+                else
+                    $titulo = '<h1 class="text-center text-primary">#' . $nombre .
+                        '<span><button hidden type="button" id="seguir" class="btn btn-primary ml-3">Seguir</button></span>
+                        <span><button  type="button" id="dejar-seguir" class="btn btn-outline-primary ml-3">Dejar de seguir</button></span>
+                        </h1>';
                 $consulta =
                     "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
                     dir.calle, dir.altura,
@@ -58,9 +71,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo ($titulo != "") ? $titulo : 'Error'; ?> - Eventu</title>
+    <title><?php echo ($nombre != "") ? $nombre : 'Error'; ?> - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/item-consulta.css">
+    <style>
+        .categoria{
+            color: var(--eventu-pink);
+        }
+    </style>
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
@@ -72,7 +90,8 @@
                     if ($titulo == "")
                         echo '<p class="text-center">Error</p>';
                     else {
-                        echo '<h1 class="text-center">' . $titulo . '</h1>';
+                        echo $titulo;
+                    
                 ?>
                 <div class="row">
                 <?php
@@ -86,5 +105,8 @@
         </div>
     </div>
     <?php require('comun/barra-fondo.php'); ?>
+    
+    <div id="idElemento" valor="<?php echo $id; ?>" hidden></div>
+    <script type="text/javascript" src="js/seguimiento-handler.js"></script>
 </body>
 </html>
