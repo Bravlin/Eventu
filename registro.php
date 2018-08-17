@@ -67,14 +67,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
-        <header>
-            <div class="logo mt-0">
+    <header>
+        <div class="container-fluid text-center">
+            <a class="logo mb-5 mt-0" href="index.php">
                 <img src="src/imagenes/logo.svg">Eventu
-            </div>
-        </header>
-    </div>
-    <div class="contenedor-pagina row justify-content-center color-eventu-red">
+            </a>
+        </div>
+    </header>
+    <div class="contenedor-pagina row justify-content-center color-eventu-red mx-0">
         <div class="form-container col-10 col-lg-8">
             <form class="formulario-principal color-blanco py-5 px-1 px-sm-3" method="POST">
                 <h1 class="text-center">¡Únete para no volver a perderte un evento!</h1>

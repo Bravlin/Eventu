@@ -65,6 +65,7 @@
                     </div>
                 </div>
                 <h3>Eventos organizados por <?php echo $usuario['nombresUsuario']; ?></h3>
+                <a href="">Ver más</a>
                 <div class="row">
                     <?php
                         $eventos_query = mysqli_query($db, 

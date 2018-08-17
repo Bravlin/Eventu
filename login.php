@@ -38,16 +38,16 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
-    <div class="container-fluid">
-        <header>
-            <div class="logo mt-0">
+    <header>
+        <div class="container-fluid text-center">
+            <a class="logo mb-5 mt-0" href="index.php">
                 <img src="src/imagenes/logo.svg">Eventu
-            </div>
-        </header>
-    </div>
-    <div class="contenedor-pagina row justify-content-center py-5">
+            </a>
+        </div>
+    </header>
+    <div class="contenedor-pagina row justify-content-center py-5 mx-0">
         <div class="form-container col-10 col-sm-8 col-md-6">
-            <form class="text-center py-5 px-1 px-sm-3" method="POST">
+            <form class="text-center py-5 px-1 px-sm-3 login" method="POST">
                 <h1>Entérate de tus próximos eventos</h1>
                 <input type="hidden" name="confirma" value="si"/>
                 <div class="row justify-content-center">

@@ -90,7 +90,7 @@
     font-size: 1em;
 }
 
-.barra-vertical a, .barra-fondo a{
+.barra-vertical .lista-navegables a, .barra-fondo a{
     text-decoration: none;
     color: black;
 }
@@ -113,6 +113,15 @@
 }
 
 .barra-fondo a p{
-    font-size: 0.5em;
+    font-size: 0.65em;
     margin: 0;
+}
+
+.populares h5{
+    font-weight: bold;
+}
+
+.populares a{
+    text-decoration: none;
+    color: var(--eventu-red);
 }

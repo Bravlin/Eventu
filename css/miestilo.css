@@ -20,17 +20,20 @@
 }
 
 .logo{
-    display: flex;
-    justify-content: center;
     font-family: "taurusLight";
     font-size: 4em;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+}
+
+.logo:hover{
+    text-decoration: none;
 }
 
 header .logo{
     color: var(--eventu-red);
+}
+
+.contenedor-pagina, footer{
+    width: 100%;
 }
 
 footer .logo{
@@ -43,14 +46,12 @@ footer .container-fluid{
     height: 100%;
 }
 
-footer .redes{
-    margin-top: 3em;
+footer .contacto{
+    color: white;
 }
 
-footer .redes p{
+footer .redes h3{
     color: white;
-    font-size: 1.75em;
-    margin-bottom: 1.5em;
 }
 
 footer .redes a{

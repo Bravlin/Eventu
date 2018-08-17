@@ -6,11 +6,11 @@
     width: 100%;
 }
 
-form{
+form.login{
     background-color: white;
 }
 
-form h1{
+form.login h1{
     color: rgb(92, 92, 92);
     padding-bottom: 5%;
     padding-left: 5%;
