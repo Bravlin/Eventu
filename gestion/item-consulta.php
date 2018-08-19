@@ -8,17 +8,17 @@
             <a href="<?php echo $enlaceEvento; ?>">
                 <img class="card-img-top" alt="Card image cap"
                     src=<?php
-                        $portada = "/media/portadas-eventos/" . $evento['idEvento'] . "-p";
+                        $portada = "../media/portadas-eventos/" . $evento['idEvento'] . "-p";
                         if (file_exists($portada))
                             echo $portada;
                         else
-                            echo "/media/portadas-eventos/0-p";
+                            echo "../media/portadas-eventos/0-p";
                     ?>
                 >
             </a>
             <div class="contenedor-nombre px-4">
                 <a class="enlace-evento" href="<?php echo $enlaceEvento; ?>">
-                    <h5 class="card-title"><?php echo $evento['nombreEvento']; ?></h5>
+                    <h5 class="card-title my-1"><?php echo $evento['nombreEvento']; ?></h5>
                 </a>
             </div>
         </div>

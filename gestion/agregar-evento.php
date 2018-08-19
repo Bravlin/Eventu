@@ -1,13 +1,14 @@
 <?php
     $requiere_sesion = true;
-    $solo_administrador = false;
-    require('php-scripts/sesion-redireccion.php');
-    require('php-scripts/db.php');
-    require('php-scripts/funciones-comunes.php');
+    $solo_administrador = true;
+    require('../php-scripts/sesion-redireccion.php');
+    require('../php-scripts/db.php');
+    require('../php-scripts/funciones-comunes.php');
     
     // Variables de control
     $confirma = $_REQUEST['confirma'];
     $nombre_ok = true;
+    $organizador_ok = true;
     $calle_ok = true;
     $callealt_ok = true;
     $provincia_ok = true;
@@ -19,6 +20,7 @@
     // Procesamiento del formulario
     if ($confirma == 'si'){
         $nombre = $_REQUEST['nombre'];
+        $organizador = $_REQUEST['organizador'];
         $descripcion = $_REQUEST['descripcion'];
         $calle = $_REQUEST['calle'];
         $callealt = $_REQUEST['callealt'];
@@ -29,6 +31,7 @@
         $etiquetas = $_REQUEST['etiquetas'];
         // Validaciones
         $nombre_ok = $nombre != "";
+        $organizador_ok = $organizador != "";
         $calle_ok = $calle != "";
         $callealt_ok = $callealt > 0;
         $provincia_ok = $codProvincia != "";
@@ -36,23 +39,22 @@
         $fecreal_ok = compararFechas($fecreal, date("Y-m-d h:i:sa")) > 0;
         $categoria_ok = $idCategoria != "";
         $portada_ok = imagenCorrecta('portada');
-        if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok){
+        if ($nombre_ok && $organizador_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok){
             mysqli_query($db,
                 "INSERT INTO direcciones (calle, altura, codCiudad)
                 VALUES ('$calle', '$callealt', '$codCiudad');");
             $direccion = mysqli_insert_id($db);
-            $idUsuario = $_SESSION['idUsuario'];
             $fechaCreac = date("Y-m-d h:i:sa");
             mysqli_query($db,
                 "INSERT INTO eventos (nombre, fechaCreac, fechaRealiz, descripcion, idDireccion, idCreador, idCategoria)
-                VALUES ('$nombre', '$fechaCreac', '$fecreal', '$descripcion', '$direccion', '$idUsuario', '$idCategoria');");
+                VALUES ('$nombre', '$fechaCreac', '$fecreal', '$descripcion', $direccion, $organizador, $idCategoria);");
             $idEvento = mysqli_insert_id($db);
             $etiquetas = strtolower($etiquetas);
             $etiquetas = preg_split("~\s+~", $etiquetas, -1, PREG_SPLIT_NO_EMPTY);
             actualizarEtiquetas($db, $etiquetas, $idEvento);
             if (is_uploaded_file($_FILES['portada']['tmp_name']))
                 subirImagen($idEvento);
-            header("location: home.php");
+            header("location: eventos.php");
         }
     }
     
@@ -77,7 +79,7 @@
     }
     
     function subirImagen($idEvento){
-        $directorio = "media/portadas-eventos/";
+        $directorio = "../media/portadas-eventos/";
         $archivo_path = $directorio . $idEvento ."-p";
         if (!move_uploaded_file($_FILES['portada']['tmp_name'], $archivo_path))
             echo '<script language="javascript">alert("Error inesperado al tratar de subir la portada.");</script>'; 
@@ -89,17 +91,17 @@
 <head>
     <title>Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
-    <link rel="stylesheet" type="text/css" href="css/formulario.css">
+    <link rel="stylesheet" type="text/css" href="../css/formulario.css">
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
     <div class="container-fluid">
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
-            <div class="col-12 col-md-9 col-lg-10 py-5 row justify-content-center mx-0">
+            <div class="col-12 col-md-9 col-lg-10 py-5 row justify-content-center mx-auto">
                 <div class="form-container col-10 col-lg-8 py-5 px-1 px-sm-3">
                     <form class="formulario-principal color-blanco" method="POST" enctype="multipart/form-data">
-                        <h1 class="text-center">Agrega tu propio evento</h1>
+                        <h1 class="text-center">Incorpora un evento</h1>
                         <input type="hidden" name="confirma" value="si"/>
                         <div class="row cuerpo-form">
                             <div class="col-12 elemento-form">
@@ -109,6 +111,25 @@
                                 <?php
                                     if (!$nombre_ok)
                                         echo '<p class="alerta">El nombre no puede quedar vacío</p>';
+                                ?>
+                            </div>
+                            <div class="col-12 elemento-form">
+                                <label for="organizador">Organizador</label>
+                                <select id="organizador" name="organizador" class="form-control" required>
+                                    <option value="">Elija quien organizará el evento...</option>
+                                    <?php
+                                        $usuarios_query = mysqli_query($db,
+                                            "SELECT idUsuario, nombres, apellidos
+                                            FROM usuarios
+                                            WHERE NOT tipo = 'A'
+                                            ORDER BY nombres ASC;");
+                                        while ($usuario = mysqli_fetch_array($usuarios_query))
+                                            echo '<option value="'.$usuario['idUsuario'].'">'.$usuario['nombres'].' '.$usuario['apellidos'].'</option>';
+                                    ?>
+                                </select>
+                                <?php
+                                    if (!$organizador_ok)
+                                        echo '<p class="alerta">Se requiere un organizador</p>';
                                 ?>
                             </div>
                             <div class="col-12 elemento-form">
@@ -206,6 +227,6 @@
     </div>
     <?php require('comun/barra-fondo.php'); ?>
     
-    <script type="text/javascript" src="js/manejador-ajax.js"></script>
+    <script type="text/javascript" src="../js/manejador-ajax.js"></script>
 </body>
 </html>

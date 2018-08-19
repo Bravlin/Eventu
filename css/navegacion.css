@@ -3,6 +3,10 @@
     --eventu-pink: rgb(255, 147, 169);
 }
 
+body{
+    min-height: 100vh;
+}
+
 .eventu-button{
     color: white;
     background-color: var(--eventu-red);

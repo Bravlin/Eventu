@@ -52,11 +52,8 @@
                 INNER JOIN etiquetas_eventos et_ev ON et.idEtiqueta = et_ev.idEtiqueta
                 WHERE et_ev.idEvento = '$idEvento'
                 ORDER BY et.nombre ASC;");
-            if (mysqli_num_rows($etiquetas_query) > 0){
-                $etiquetas = mysqli_fetch_array($etiquetas_query)['nombre'];
-                while ($etiqueta = mysqli_fetch_array($etiquetas_query))
-                    $etiquetas = $etiquetas . ' ' . $etiqueta['nombre'];
-            }
+            while ($etiqueta = mysqli_fetch_array($etiquetas_query))
+                $etiquetas = $etiquetas . $etiqueta['nombre'] . " ";
         }
     }
     else {
@@ -93,9 +90,9 @@
                 fechaRealiz = '$fechaRealiz', estado = '$estado'
                 WHERE idEvento = $idEvento;");
             $etiquetas = strtolower($etiquetas);
-            $etiquetas = explode(" ", $etiquetas);
+            $etiquetas = preg_split("~\s+~", $etiquetas, -1, PREG_SPLIT_NO_EMPTY);
             actualizarEtiquetas($db, $etiquetas, $idEvento);
-            header("location: home.php");
+            header("location: evento.php?idEvento=$idEvento");
         }
     }
     
@@ -232,7 +229,7 @@
                                     <?php
                                         $ciudades_query = mysqli_query($db,
                                             "SELECT * FROM ciudades
-                                            WHERE codProvincia =".$evento['codProvincia']." ORDER BY nombre ASC;");
+                                            WHERE codProvincia =".$codProvincia." ORDER BY nombre ASC;");
                                         while ($ciudad = mysqli_fetch_array($ciudades_query))
                                             if ($ciudad['codCiudad'] == $codCiudad)
                                                 echo "<option value='".$ciudad['codCiudad']."' selected>".$ciudad['nombre']."</option>";
@@ -291,7 +288,10 @@
                                 <div class="mt-3">
                                     <input type="hidden" name="confirma" value="si"/>
                                     <button class="btn btn-primary" type="submit">Modificar</button>
-                                    <button class="btn btn-danger ml-3" type="button">Eliminar</button>
+                                    <a class="btn btn-danger ml-3"
+                                        href="php-scripts/eliminar-evento.php?idEvento=<?php echo $idEvento; ?>">
+                                        Eliminar
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -20,7 +20,7 @@
                 </a>
             </div>
             <div class="col-3">
-                <a href="">
+                <a href="/agenda.php">
                     <i class="fa fa-calendar"></i>
                     <p>Agenda</p>
                 </a>

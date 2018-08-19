@@ -8,9 +8,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
-    <link rel="stylesheet" type="text/css" href="/css/tarjeta-evento.css">
+    <link rel="stylesheet" type="text/css" href="/css/item-consulta.css">
+    <style>
+        .agregar-evento{
+            color: var(--eventu-red);
+            text-decoration: none;
+            font-size: 1.75em;
+        }
+        
+        .agregar-evento:hover{
+            color: var(--eventu-pink);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
@@ -18,26 +29,24 @@
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-9 col-lg-10 py-5">
-                <h1 class="mb-5 text-center">Eventos pendientes de aprobación</h1>
+                <h1 class="mb-5 text-center">Administrador de eventos</h1>
+                <div class="mb-3">
+                    <a href="agregar-evento.php" class="agregar-evento"><i class="fa fa-plus-circle mr-1"></i>Agregar evento</a>
+                </div>
                 <div class="row">
                     <?php
                         $eventos_query = mysqli_query($db,
-                            "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz, e.fechaCreac,
+                            "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz, e.fechaCreac, e.fechaCreac,
                             dir.calle, dir.altura,
                             ciudades.nombre AS nombreCiudad,
-                            provincias.nombre AS nombreProvincia,
-                            u.nombres AS nombresCread, u.apellidos AS apellidosCread,
-                            cat.nombre AS nombreCateg, cat.idCategoria
+                            provincias.nombre AS nombreProvincia
                             FROM eventos e
-                            INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
+                            INNER JOIN direcciones dir ON dir.idDireccion = e.idDireccion
                             INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
-                            INNER JOIN usuarios u ON u.idUsuario = e.idCreador
-                            INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
-                            WHERE e.estado = 'pendiente'
-                            ORDER BY e.fechaCreac ASC;");
+                            ORDER BY e.nombre ASC;");
                         while ($evento = mysqli_fetch_array($eventos_query))
-                            require('tarjeta-evento.php');
+                            require('item-consulta.php');
                     ?>
                 </div>
             </div>

@@ -50,7 +50,7 @@
                     ?>
                     >
                     <div class="contenedor-titulo px-1 px-md-3">
-                        <h1 class="nombre-evento"><?php echo $evento['nombreEvento']; ?></h1>
+                        <h1 class="nombre-evento my-1"><?php echo $evento['nombreEvento']; ?></h1>
                     </div>
                 </div>
                 <p><?php echo $evento['descripcion']; ?></p>

@@ -18,7 +18,7 @@
             </a>
             <div class="contenedor-nombre px-4">
                 <a class="enlace-evento" href="<?php echo $enlaceEvento; ?>">
-                    <h5 class="card-title"><?php echo $evento['nombreEvento']; ?></h5>
+                    <h5 class="card-title my-1"><?php echo $evento['nombreEvento']; ?></h5>
                 </a>
             </div>
         </div>
