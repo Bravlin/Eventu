@@ -10,7 +10,7 @@
         dir.calle, dir.altura,
         ciudades.nombre AS nombreCiudad,
         provincias.nombre AS nombreProvincia,
-        u.nombres AS nombresCread, u.apellidos AS apellidosCread,
+        u.nombres AS nombresCread, u.apellidos AS apellidosCread, u.idUsuario AS idCread,
         cat.nombre AS nombreCateg, cat.idCategoria
         FROM eventos e
         INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
@@ -29,6 +29,7 @@
     <?php require('comun/head-navegacion.php'); ?>
     <title><?php echo $evento['nombreEvento']; ?> - Eventu</title>
     <link rel="stylesheet" type="text/css" href="css/evento.css">
+    <link rel="stylesheet" type="text/css" href="css/comentario.css">
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
@@ -50,9 +51,10 @@
                     ?>
                     >
                     <div class="contenedor-titulo px-1 px-md-3">
-                        <h1 class="nombre-evento my-1"><?php echo $evento['nombreEvento']; ?></h1>
+                        <h1 class="nombre-evento my-1 text-center"><?php echo $evento['nombreEvento']; ?></h1>
                     </div>
                 </div>
+                <h5>Descripción:</h5>
                 <p><?php echo $evento['descripcion']; ?></p>
                 <div class="info-general row py-3 my-5">
                     <div class="col-12 col-sm-6 mb-3 mb-sm-0">
@@ -76,7 +78,8 @@
                     <div class="col-12 col-sm-6 d-flex flex-column">
                         <div class="mb-3">
                             <i class="fa fa-user-circle"></i>
-                            Organizado por <?php echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?>
+                            Organizado por <a class="usuario" href="/perfil.php?idUsuario=<?php echo $evento['idCread']; ?>"><?php 
+                                echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?></a>
                         </div>
                         <div class="mb-3">
                             <i class="fa fa-calendar"></i>
@@ -107,9 +110,30 @@
                         </div>
                     </div>
                 </div>
+                <h5 class="mb-5">Comentarios</h5>
+                <div class="mb-4">
+                    <textarea id="ingresar-comentario" class="form-control mb-3" placeholder="Escribe un comentario..."></textarea>
+                    <button id="enviar-comentario" class="button btn-primary" type="button" disabled>Enviar</button>
+                </div>
+                <div id="comentarios" class="container comentarios">
+                    <?php
+                        $comentarios_query = mysqli_query($db,
+                            "SELECT com.contenido, com.idUsuario, com.fechaCreac,
+                            u.nombres AS nombresCread, u.apellidos AS apellidosCread
+                            FROM comentarios com
+                            INNER JOIN usuarios u ON u.idUsuario = com.idUsuario
+                            WHERE com.idEvento = $idEvento
+                            ORDER BY com.fechaCreac DESC");
+                        while ($comentario = mysqli_fetch_array($comentarios_query))
+                            require('comentario.php');
+                    ?>
+                </div>
             </div>
         </div>
     </div>
     <?php require('comun/barra-fondo.php'); ?>
+    
+    <div id="idEvento" valor="<?php echo $idEvento; ?>" hidden></div>
+    <script type="text/javascript" src="js/comentarios-handler.js"></script>
 </body>
 </html>

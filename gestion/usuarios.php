@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Usuarios - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/item-usuario.css">
     <style>

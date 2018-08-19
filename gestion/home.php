@@ -26,7 +26,7 @@
                             dir.calle, dir.altura,
                             ciudades.nombre AS nombreCiudad,
                             provincias.nombre AS nombreProvincia,
-                            u.nombres AS nombresCread, u.apellidos AS apellidosCread,
+                            u.nombres AS nombresCread, u.apellidos AS apellidosCread, u.idUsuario AS idCread,
                             cat.nombre AS nombreCateg, cat.idCategoria
                             FROM eventos e
                             INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion

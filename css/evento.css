@@ -53,3 +53,7 @@
 .inscribirse{
     font-size: 2em;
 }
+
+.usuario, .usuario:hover{
+    color: var(--eventu-pink);
+}

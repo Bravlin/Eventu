@@ -27,12 +27,15 @@
     <div class="container-fluid">
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
-            <div class="col-12 col-md-9 col-lg-10 py-5 row">
-                <?php
-                    $categorias_query = mysqli_query($db, "SELECT * FROM categorias ORDER BY nombre ASC;");
-                    while ($categoria = mysqli_fetch_array($categorias_query))
-                        require('panel-categoria.php');
-                ?>
+            <div class="col-12 col-md-9 col-lg-10 py-5">
+                <h1 class="titulo text-center mb-5">Categorías</h1>
+                <div class="row mx-auto">
+                    <?php
+                        $categorias_query = mysqli_query($db, "SELECT * FROM categorias ORDER BY nombre ASC;");
+                        while ($categoria = mysqli_fetch_array($categorias_query))
+                            require('panel-categoria.php');
+                    ?>
+                </div>
             </div>
         </div>
     </div>
