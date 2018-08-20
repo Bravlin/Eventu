@@ -106,7 +106,29 @@
                             </b>
                         </div>
                         <div class="my-auto mx-auto">
-                            <button class="eventu-button inscribirse rounded px-3">Inscribirse</button>
+                            <?php 
+                                $idUsuario = $_SESSION['idUsuario'];
+                                if ($idUsuario != $evento['idCread']){
+                                    $inscripciones_query = mysqli_query($db,
+                                        "SELECT * FROM inscripciones
+                                        WHERE idUsuario = $idUsuario AND idEvento = $idEvento;");
+                                    if (mysqli_num_rows($inscripciones_query) == 0)
+                                        echo
+                                            '<button id="inscribirse" class="eventu-button inscribirse rounded px-3">Inscribirse</button>
+                                            <button id="desinscribirse" class="eventu-button inscribirse rounded px-3" hidden>Desinscribirse</button>';
+                                    else
+                                        echo
+                                            '<button id="inscribirse" class="eventu-button inscribirse rounded px-3" hidden>Inscribirse</button>
+                                            <button id="desinscribirse" class="eventu-button inscribirse rounded px-3">Desinscribirse</button>';
+                                }
+                                else
+                                    echo
+                                        '<button class="btn btn-primary" type="submit">Modificar</button>
+                                        <a class="btn btn-danger ml-3"
+                                            href="php-scripts/eliminar-evento.php?idEvento='.$idEvento.'">
+                                            Eliminar
+                                        </a>';
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -134,6 +156,6 @@
     <?php require('comun/barra-fondo.php'); ?>
     
     <div id="idEvento" valor="<?php echo $idEvento; ?>" hidden></div>
-    <script type="text/javascript" src="js/comentarios-handler.js"></script>
+    <script type="text/javascript" src="js/evento-handler.js"></script>
 </body>
 </html>

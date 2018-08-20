@@ -19,7 +19,7 @@
     
     $confirma = $_REQUEST['confirma'];
     $idEvento = $_REQUEST['idEvento'];
-    if (!$confirma == 'si'){
+    if ($confirma != 'si'){
         $eventos_query = mysqli_query($db,
             "SELECT e.idEvento, e.nombre AS nombreEvento, e.descripcion, e.fechaRealiz, e.estado,
             dir.calle, dir.altura,
@@ -132,7 +132,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo $evento['nombreEvento']; ?> - Eventu</title>
+    <title><?php echo $nombreEvento; ?> - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="/css/evento.css">
     <link rel="stylesheet" type="text/css" href="css/edicion-evento.css">

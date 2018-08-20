@@ -22,7 +22,7 @@
                 <div class="row px-2">
                     <?php
                         $eventos_query = mysqli_query($db,
-                            "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
+                            "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz, e.idCreador,
                             dir.calle, dir.altura,
                             ciudades.nombre AS nombreCiudad,
                             provincias.nombre AS nombreProvincia
@@ -30,7 +30,19 @@
                             INNER JOIN direcciones dir ON dir.idDireccion = e.idDireccion
                             INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
-                            ORDER BY e.fechaRealiz ASC;");
+                            WHERE e.idCreador = ".$_SESSION['idUsuario']." AND e.estado = 'aprobado'
+                            UNION
+                            SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz, e.idCreador,
+                            dir.calle, dir.altura,
+                            ciudades.nombre AS nombreCiudad,
+                            provincias.nombre AS nombreProvincia
+                            FROM eventos e
+                            INNER JOIN direcciones dir ON dir.idDireccion = e.idDireccion
+                            INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
+                            INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
+                            INNER JOIN inscripciones ON inscripciones.idEvento = e.idEvento
+                            WHERE inscripciones.idUsuario = ".$_SESSION['idUsuario']."
+                            ORDER BY fechaRealiz ASC;");
                         while ($evento = mysqli_fetch_array($eventos_query))
                             require('item-agenda.php');
                     ?>

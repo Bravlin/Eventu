@@ -36,7 +36,7 @@
                             INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
                             INNER JOIN etiquetas_eventos et_e ON et_e.idEvento = e.idEvento
                             INNER JOIN etiquetas_usuarios et_u ON et_u.idEtiqueta = et_e.idEtiqueta
-                            WHERE et_u.idUsuario = '".$_SESSION['idUsuario']."'
+                            WHERE et_u.idUsuario = '".$_SESSION['idUsuario']."' AND e.estado = 'aprobado'
                             ORDER BY e.fechaRealiz ASC;");
                         if (mysqli_num_rows($eventos_query) == 0){
                             $eventos_query = mysqli_query($db,
@@ -52,7 +52,7 @@
                                 INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                                 INNER JOIN usuarios u ON u.idUsuario = e.idCreador
                                 INNER JOIN categorias cat ON cat.idCategoria = e.idCategoria
-                                WHERE dir.codCiudad = '".$_SESSION['codCiudad']."'
+                                WHERE dir.codCiudad = '".$_SESSION['codCiudad']."' AND e.estado = 'aprobado'
                                 ORDER BY e.fechaRealiz ASC;");
                         }
                         while ($evento = mysqli_fetch_array($eventos_query))

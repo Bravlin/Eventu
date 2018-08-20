@@ -35,7 +35,7 @@
                             INNER JOIN direcciones dir ON dir.idDireccion = e.idDireccion
                             INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
-                            WHERE $criterio_query LIKE '%$consulta%';");
+                            WHERE $criterio_query LIKE '%$consulta%' AND e.estado = 'aprobado';");
                         while ($evento = mysqli_fetch_array($eventos_query))
                             require('item-consulta.php');
                     ?>

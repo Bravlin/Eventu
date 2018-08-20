@@ -187,7 +187,7 @@
         /*global $*/
         
         $(document).ready(function(){
-            $('#contrasena, #contrasenaVerificacion').on('change', function(){
+            $('#contrasena, #contrasenaVerificacion').on('keyup blur', function(){
                 var contrasena = $('#contrasena').val();
                 var contrasenaCheck = $('#contrasenaVerificacion').val();
                 if (contrasena == contrasenaCheck){

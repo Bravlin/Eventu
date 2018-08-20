@@ -25,7 +25,7 @@
                     INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
                     INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                     INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
-                    WHERE e.idCategoria = '$id'
+                    WHERE e.idCategoria = '$id' AND e.estado = 'aprobado'
                     ORDER BY e.fechaRealiz ASC;";
             }
             break;
@@ -59,7 +59,7 @@
                     INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                     INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
                     INNER JOIN etiquetas_eventos et_ev ON et_ev.idEvento = e.idEvento
-                    WHERE et_ev.idEtiqueta = '$id'
+                    WHERE et_ev.idEtiqueta = '$id' AND e.estado = 'aprobado'
                     ORDER BY e.fechaRealiz ASC;";
             }
             break;
