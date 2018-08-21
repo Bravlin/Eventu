@@ -17,6 +17,7 @@
         <div class="row">
             <?php require('comun/barra-vertical.php'); ?>
             <div class="col-12 col-md-9 col-lg-10 py-5">
+                <h1 class="text-center mb-5 text-primary">Etiquetas</h1>
                 <ul class="row">
                     <?php
                         $etiquetas_query = mysqli_query($db, "SELECT * FROM etiquetas ORDER BY nombre ASC;");

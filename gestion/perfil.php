@@ -7,6 +7,7 @@
     $idUsuario = $_REQUEST['idUsuario'];
     $usuarios_query = mysqli_query($db,
         "SELECT u.nombres AS nombresUsuario, u.apellidos, u.fechaNac, u.email,
+        dir.calle, dir.altura,
         c.nombre AS nombreCiudad,
         prov.nombre AS nombreProvincia
         FROM usuarios u
@@ -57,7 +58,7 @@
                     </div>
                     <div class="col-12">
                         <i class="fa fa-map-marker"></i>
-                        <?php echo $usuario['nombreCiudad'] . ', ' . $usuario['nombreProvincia']; ?>
+                        <?php echo $usuario['calle'] . ' ' . $usuario['altura'] . ', '  . $usuario['nombreCiudad'] . ', ' . $usuario['nombreProvincia']; ?>
                     </div>
                     <div class="col-12">
                         <i class="fa fa-envelope"></i>

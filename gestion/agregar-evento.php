@@ -89,7 +89,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Eventu</title>
+    <title>Agregar evento - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="../css/formulario.css">
 </head>

@@ -12,6 +12,10 @@
     <title>Categorías - Eventu</title>
     
     <style>
+        .titulo{
+            color: var(--eventu-pink);
+        }
+        
         .categoria{
             text-decoration: none;
             color: var(--eventu-pink);

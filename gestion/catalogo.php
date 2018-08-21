@@ -12,7 +12,8 @@
             if (mysqli_num_rows($query) != 1)
                 $titulo = "";
             else {
-                $titulo = mysqli_fetch_array($query)['nombre'];
+                $nombre = mysqli_fetch_array($query)['nombre'];
+                $titulo = '<h1 class="text-center categoria">' . $nombre . '</h1>';
                 $consulta = 
                     "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz, e.fechaCreac,
                     dir.calle, dir.altura,
@@ -33,7 +34,8 @@
             if (mysqli_num_rows($query) != 1)
                 $titulo = "";
             else {
-                $titulo = '#' . mysqli_fetch_array($query)['nombre'];
+                $nombre = mysqli_fetch_array($query)['nombre'];
+                $titulo = '<h1 class="text-center text-primary">#' . $nombre . '</h1>';
                 $consulta =
                     "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz, e.fechaCreac,
                     dir.calle, dir.altura,
@@ -58,9 +60,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo ($titulo != "") ? $titulo : 'Error'; ?> - Eventu</title>
+    <title><?php echo ($nombre != "") ? $nombre : 'Error'; ?> - Eventu</title>
     <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="/css/item-consulta.css">
+    <style>
+        .categoria{
+            color: var(--eventu-pink);
+        }
+    </style>
 </head>
 <body>
     <?php require('comun/navbar.php'); ?>
@@ -72,7 +79,7 @@
                     if ($titulo == "")
                         echo '<p class="text-center">Error</p>';
                     else {
-                        echo '<h1 class="text-center">' . $titulo . '</h1>';
+                        echo $titulo;
                 ?>
                 <div class="row">
                 <?php

@@ -5,6 +5,8 @@
 
 .item-usuario i{
     color: var(--eventu-pink);
+    width: 20px;
+    height: 20px;
 }
 
 .item-usuario ul{
@@ -24,7 +26,17 @@
 .contenedor-nombre{
     width:100%;
     background-color: var(--eventu-red);
+    
+}
+
+.nombre-apellido{
     color: white;
+    text-decoration: none;
+}
+
+.nombre-apellido:hover{
+    color: var(--eventu-pink);
+    text-decoration: none;
 }
 
 @media screen and (max-width: 575px){

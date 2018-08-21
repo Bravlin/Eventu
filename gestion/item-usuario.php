@@ -12,7 +12,9 @@
         </div>
         <div class="col-12 col-sm-8 px-0">
             <div class="contenedor-nombre px-4">
-                <h4 class="nombre-apellido text-center"><?php echo $usuario['nombres'] . ' ' . $usuario['apellidos']; ?></h4>
+                <a class="nombre-apellido" href="perfil.php?idUsuario=<?php echo $usuario['idUsuario']; ?>">
+                    <h4 class="text-center"><?php echo $usuario['nombres'] . ' ' . $usuario['apellidos']; ?></h4>
+                </a>
             </div>
             <ul class="pl-0 mx-4">
                 <li>

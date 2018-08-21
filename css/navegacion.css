@@ -106,6 +106,8 @@ body{
 
 .barra-vertical i, .barra-fondo i{
     color: var(--eventu-red);
+    height: 20px;
+    width: 20px;
 }
 
 .barra-vertical i{

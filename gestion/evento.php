@@ -260,7 +260,8 @@
                         <div class="col-12 col-sm-6 d-flex flex-column">
                             <div class="mb-3">
                                 <i class="fa fa-user-circle"></i>
-                                Organizado por <?php echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?>
+                                Organizado por <a class="usuario" href="/perfil.php?idUsuario=<?php echo $evento['idCread']; ?>"><?php 
+                                    echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?></a>
                             </div>
                             <div class="mb-2">
                                 <label for="fechaReal"><i class="fa fa-calendar"></i> Fecha y <i class="fa fa-clock-o"></i> hora</label>
