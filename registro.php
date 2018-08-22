@@ -15,6 +15,7 @@
     $provincia_ok = true;
     $ciudad_ok = true;
     $contrasena_ok = true;
+    $perfil_ok = true;
     
     // Procesamiento del formulario
     if ($confirma == 'si'){
@@ -38,12 +39,15 @@
         $provincia_ok = $codProvincia > 0;
         $ciudad_ok = $codCiudad > 0;
         $contrasena_ok = $contrasena != '' && $contrasena == $contrasVerif;
-        if ($nombres_ok && $apellidos_ok && $fecnac_ok && $email_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $contrasena_ok){
+        $perfil_ok = imagenCorrecta('perfil');
+        if ($nombres_ok && $apellidos_ok && $fecnac_ok && $email_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $contrasena_ok && $perfil_ok){
             $contrasena = md5($contrasena);
             mysqli_query($db, "INSERT INTO direcciones (calle, altura, codCiudad) VALUES ('$calle', '$callealt', '$codCiudad');");
             $direccion = mysqli_insert_id($db);
             mysqli_query($db, "INSERT INTO usuarios (nombres, apellidos, fechaNac, email, clave, idDireccion)
-            VALUES ('$nombres', '$apellidos', '$fecnac', '$email', '$contrasena', '$direccion');");
+                VALUES ('$nombres', '$apellidos', '$fecnac', '$email', '$contrasena', '$direccion');");
+            if (is_uploaded_file($_FILES['perfil']['tmp_name']))
+                subirImagen(mysqli_insert_id($db));
             header("location: login.php");
         }
     }
@@ -55,6 +59,13 @@
         }
         else
             return false;
+    }
+    
+    function subirImagen($idUsuario){
+        $directorio = "media/perfiles-usuarios/";
+        $archivo_path = $directorio . $idUsuario ."-perfil";
+        if (!move_uploaded_file($_FILES['perfil']['tmp_name'], $archivo_path))
+            echo '<script language="javascript">alert("Error inesperado al tratar de subir la imagen de perfil.");</script>'; 
     }
 ?>
 
@@ -76,7 +87,7 @@
     </header>
     <div class="contenedor-pagina row justify-content-center color-eventu-red mx-0">
         <div class="form-container col-10 col-lg-8">
-            <form class="formulario-principal color-blanco py-5 px-1 px-sm-3" method="POST">
+            <form class="formulario-principal color-blanco py-5 px-1 px-sm-3" method="POST" enctype="multipart/form-data">
                 <h1 class="text-center">¡Únete para no volver a perderte un evento!</h1>
                 <input type="hidden" name="confirma" value="si"/>
                 <div class="row cuerpo-form">
@@ -172,6 +183,14 @@
                         <label for="contrasenaVerificacion">Verifique la contraseña</label>
                         <input id="contrasenaVerificacion" name="contrasverif" type="password" class="form-control" placeholder="*****"
                         value="<?php if(isset($_REQUEST['contrasverif'])) echo $_REQUEST['contrasverif']; ?>" required>
+                    </div>
+                    <div class="col-12 elemento-form">
+                        <label for="perfil">Foto de perfil (no obligatorio)</label>
+                        <input id="perfil" name="perfil" type="file" class="form-control">
+                        <?php
+                            if (!$perfil_ok)
+                                echo '<p class="alerta">Archivo no válido.</p>';
+                        ?>
                     </div>
                 </div>
                 <div class="row justify-content-center">

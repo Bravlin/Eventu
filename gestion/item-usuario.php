@@ -1,14 +1,16 @@
 <div class="col-12 col-lg-6 mb-5 px-0">
     <div class="row item-usuario mx-auto border border-secondary">
         <div class="col-12 col-sm-4 contenedor-imagen px-0 py-3 py-sm-0">
-            <img class="imagen-perfil" alt="Perfil"
-                src=<?php
-                    $avatar = "../media/perfiles-usuarios/" . $usuario['idUsuario'] . "-perfil";
-                    if (file_exists($avatar))
-                        echo $avatar;
-                    else
-                        echo "../media/perfiles-usuarios/0-perfil";
-                ?>>
+            <a href="perfil.php?idUsuario=<?php echo $usuario['idUsuario']; ?>">
+                <img class="imagen-perfil" alt="Perfil"
+                    src=<?php
+                        $avatar = "../media/perfiles-usuarios/" . $usuario['idUsuario'] . "-perfil";
+                        if (file_exists($avatar))
+                            echo $avatar;
+                        else
+                            echo "../media/perfiles-usuarios/0-perfil";
+                    ?>>
+            </a>
         </div>
         <div class="col-12 col-sm-8 px-0">
             <div class="contenedor-nombre px-4">

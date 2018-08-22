@@ -136,6 +136,7 @@
     <?php require('comun/head-navegacion.php'); ?>
     <link rel="stylesheet" type="text/css" href="/css/evento.css">
     <link rel="stylesheet" type="text/css" href="css/edicion-evento.css">
+    <link rel="stylesheet" type="text/css" href="/css/comentario.css">
     <style>
         .alerta{
             color: red;
@@ -298,6 +299,24 @@
                         </div>
                     </div>
                 </form>
+                <h5 class="mb-5">Comentarios</h5>
+                <div class="mb-4">
+                    <textarea id="ingresar-comentario" class="form-control mb-3" placeholder="Escribe un comentario..."></textarea>
+                    <button id="enviar-comentario" class="button btn-primary" type="button" disabled>Enviar</button>
+                </div>
+                <div id="comentarios" class="container comentarios">
+                    <?php
+                        $comentarios_query = mysqli_query($db,
+                            "SELECT com.contenido, com.idUsuario, com.fechaCreac,
+                            u.nombres AS nombresCread, u.apellidos AS apellidosCread
+                            FROM comentarios com
+                            INNER JOIN usuarios u ON u.idUsuario = com.idUsuario
+                            WHERE com.idEvento = $idEvento
+                            ORDER BY com.fechaCreac DESC");
+                        while ($comentario = mysqli_fetch_array($comentarios_query))
+                            require('comentario.php');
+                    ?>
+                </div>
             </div>
         </div>
     </div>

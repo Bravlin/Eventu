@@ -79,7 +79,7 @@
                             INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
                             INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
                             INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
-                            WHERE e.idCreador = '$idUsuario'
+                            WHERE e.idCreador = '$idUsuario' AND e.estado = 'aprobado'
                             ORDER BY e.fechaRealiz ASC
                             LIMIT 4;");
                         while ($evento = mysqli_fetch_array($eventos_query))
