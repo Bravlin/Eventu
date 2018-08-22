@@ -1,7 +1,7 @@
 /*global $*/
         
 $(document).ready(function(){
-    $('#ingresar-comentario').on('keyup blur', function(){
+    $('#ingresar-comentario').bind('input', function(){
         if ($('#ingresar-comentario').val() != "")
             $('#enviar-comentario').prop("disabled", false);
         else

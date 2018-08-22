@@ -90,7 +90,7 @@
                             <i class="fa fa-clock-o pl-3"></i>
                             <?php echo date('H:i', $fechaHora); ?>
                         </div>
-                        <div class="mb-5 mb-sm-0">
+                        <div class="mb-5 mb-sm-0 overflow-auto">
                             <i class="fa fa-hashtag"></i>
                             <b>
                                 <?php

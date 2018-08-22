@@ -36,7 +36,7 @@
         $fecreal_ok = compararFechas($fecreal, date("Y-m-d h:i:sa")) > 0;
         $categoria_ok = $idCategoria != "";
         $portada_ok = imagenCorrecta('portada');
-        if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok){
+        if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok && $portada_ok){
             mysqli_query($db,
                 "INSERT INTO direcciones (calle, altura, codCiudad)
                 VALUES ('$calle', '$callealt', '$codCiudad');");
