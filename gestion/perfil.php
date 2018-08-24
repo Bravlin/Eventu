@@ -13,7 +13,7 @@
         FROM usuarios u
         INNER JOIN direcciones dir ON dir.idDireccion = u.idDireccion
         INNER JOIN ciudades c ON c.codCiudad = dir.codCiudad
-        INNER JOIN provincias prov ON prov.codProvincia = c.codCiudad
+        INNER JOIN provincias prov ON prov.codProvincia = c.codProvincia
         WHERE u.idUsuario = '$idUsuario';");
     if (mysqli_num_rows($usuarios_query) == 1)
         $usuario = mysqli_fetch_array($usuarios_query);

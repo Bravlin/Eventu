@@ -12,7 +12,7 @@
         FROM usuarios u
         INNER JOIN direcciones dir ON dir.idDireccion = u.idDireccion
         INNER JOIN ciudades c ON c.codCiudad = dir.codCiudad
-        INNER JOIN provincias prov ON prov.codProvincia = c.codCiudad
+        INNER JOIN provincias prov ON prov.codProvincia = c.codProvincia
         WHERE u.idUsuario = '$idUsuario';");
     if (mysqli_num_rows($usuarios_query) == 1)
         $usuario = mysqli_fetch_array($usuarios_query);
@@ -68,20 +68,36 @@
                 <a href="">Ver más</a>
                 <div class="row">
                     <?php
-                        $eventos_query = mysqli_query($db, 
-                            "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
-                            dir.calle, dir.altura,
-                            ciudades.nombre AS nombreCiudad,
-                            provincias.nombre AS nombreProvincia,
-                            categorias.nombre AS nombreCateg
-                            FROM eventos e
-                            INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
-                            INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
-                            INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
-                            INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
-                            WHERE e.idCreador = '$idUsuario' AND e.estado = 'aprobado'
-                            ORDER BY e.fechaRealiz ASC
-                            LIMIT 4;");
+                        if ($idUsuario != $_SESSION['idUsuario'])
+                            $eventos_query = mysqli_query($db, 
+                                "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
+                                dir.calle, dir.altura,
+                                ciudades.nombre AS nombreCiudad,
+                                provincias.nombre AS nombreProvincia,
+                                categorias.nombre AS nombreCateg
+                                FROM eventos e
+                                INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
+                                INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
+                                INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
+                                INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
+                                WHERE e.idCreador = '$idUsuario' AND e.estado = 'aprobado'
+                                ORDER BY e.fechaRealiz ASC
+                                LIMIT 4;");
+                        else
+                            $eventos_query = mysqli_query($db, 
+                                "SELECT e.idEvento, e.nombre AS nombreEvento, e.fechaRealiz,
+                                dir.calle, dir.altura,
+                                ciudades.nombre AS nombreCiudad,
+                                provincias.nombre AS nombreProvincia,
+                                categorias.nombre AS nombreCateg
+                                FROM eventos e
+                                INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
+                                INNER JOIN ciudades ON ciudades.codCiudad = dir.codCiudad
+                                INNER JOIN provincias ON provincias.codProvincia = ciudades.codProvincia
+                                INNER JOIN categorias ON categorias.idCategoria = e.idCategoria
+                                WHERE e.idCreador = '$idUsuario'
+                                ORDER BY e.fechaRealiz ASC
+                                LIMIT 4;");
                         while ($evento = mysqli_fetch_array($eventos_query))
                             require('item-consulta.php');
                     ?>

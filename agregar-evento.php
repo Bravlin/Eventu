@@ -37,6 +37,9 @@
         $categoria_ok = $idCategoria != "";
         $portada_ok = imagenCorrecta('portada');
         if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok && $portada_ok){
+            $nombre = mysqli_real_escape_string($db, $nombre);
+            $descripcion = mysqli_real_escape_string($db, $descripcion);
+            $calle = mysqli_real_escape_string($db, $calle);
             mysqli_query($db,
                 "INSERT INTO direcciones (calle, altura, codCiudad)
                 VALUES ('$calle', '$callealt', '$codCiudad');");

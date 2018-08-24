@@ -26,6 +26,21 @@ $(document).ready(function(){
         }); 
     });
     
+    $('#comentarios').on('click', '.eliminar-comentario', function(){
+        var idComentario = $(this).attr('idcoment');
+        $.ajax({
+            type: 'POST',
+            url: '/php-scripts/eliminar-comentario.php',
+            data: {
+                idComentario: idComentario
+            },
+            success:function(html){
+                var comentario = "#comentario-" + idComentario;
+                $(comentario).remove();
+            }
+        });
+    })
+    
     $('#inscribirse').on('click', function(){
         var idEvento = $('#idEvento').attr('valor');
         $.ajax({

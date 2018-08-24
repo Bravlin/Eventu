@@ -42,6 +42,9 @@
         $perfil_ok = imagenCorrecta('perfil');
         if ($nombres_ok && $apellidos_ok && $fecnac_ok && $email_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $contrasena_ok && $perfil_ok){
             $contrasena = md5($contrasena);
+            $nombres = mysqli_real_escape_string($db, $nombres);
+            $apellidos = mysqli_real_escape_string($db, $apellidos);
+            $calle = mysqli_real_escape_string($db, $calle);
             mysqli_query($db, "INSERT INTO direcciones (calle, altura, codCiudad) VALUES ('$calle', '$callealt', '$codCiudad');");
             $direccion = mysqli_insert_id($db);
             mysqli_query($db, "INSERT INTO usuarios (nombres, apellidos, fechaNac, email, clave, idDireccion)

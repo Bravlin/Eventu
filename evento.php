@@ -140,7 +140,7 @@
                 <div id="comentarios" class="container comentarios">
                     <?php
                         $comentarios_query = mysqli_query($db,
-                            "SELECT com.contenido, com.idUsuario, com.fechaCreac,
+                            "SELECT com.contenido, com.idUsuario, com.fechaCreac, com.idComentario,
                             u.nombres AS nombresCread, u.apellidos AS apellidosCread
                             FROM comentarios com
                             INNER JOIN usuarios u ON u.idUsuario = com.idUsuario

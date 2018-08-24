@@ -25,7 +25,7 @@
             dir.calle, dir.altura,
             ciudades.nombre AS nombreCiudad, ciudades.codCiudad,
             provincias.nombre AS nombreProvincia, provincias.codProvincia,
-            u.nombres AS nombresCread, u.apellidos AS apellidosCread,
+            u.nombres AS nombresCread, u.apellidos AS apellidosCread, u.idUsuario AS idCread,
             cat.nombre AS nombreCateg, cat.idCategoria
             FROM eventos e
             INNER JOIN direcciones dir ON e.idDireccion = dir.idDireccion
@@ -80,6 +80,9 @@
         if ($nombre_ok && $calle_ok && $callealt_ok && $provincia_ok && $ciudad_ok && $fecreal_ok && $categoria_ok && $estado_ok){
             $eventos_query = mysqli_query($db, "SELECT idDireccion FROM eventos WHERE idEvento = $idEvento;");
             $idDireccion = mysqli_fetch_array($eventos_query)['idDireccion'];
+            $nombre = mysqli_real_escape_string($db, $nombre);
+            $descripcion = mysqli_real_escape_string($db, $descripcion);
+            $calle = mysqli_real_escape_string($db, $calle);
             mysqli_query($db,
                 "UPDATE direcciones
                 SET calle = '$calle', altura = $altura, codCiudad = $codCiudad
@@ -175,7 +178,7 @@
                             ?>
                         >
                         <div class="contenedor-titulo px-1 px-md-3">
-                            <input id="nombre" name="nombre" type="text" class="editable ed-nombre" value="<?php echo $nombreEvento; ?>" required>
+                            <input id="nombre" name="nombre" type="text" class="editable ed-nombre text-center" value="<?php echo $nombreEvento; ?>" required>
                         </div>
                         <?php
                             if (!$nombre_ok)
@@ -261,7 +264,7 @@
                         <div class="col-12 col-sm-6 d-flex flex-column">
                             <div class="mb-3">
                                 <i class="fa fa-user-circle"></i>
-                                Organizado por <a class="usuario" href="/perfil.php?idUsuario=<?php echo $evento['idCread']; ?>"><?php 
+                                Organizado por <a class="usuario" href="perfil.php?idUsuario=<?php echo $evento['idCread']; ?>"><?php 
                                     echo $evento['nombresCread'].' '.$evento['apellidosCread']; ?></a>
                             </div>
                             <div class="mb-2">

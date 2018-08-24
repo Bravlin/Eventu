@@ -1,4 +1,4 @@
-<div class="row mb-3 border comentario">
+<div id="comentario-<?php echo $comentario['idComentario']; ?>" class="row mb-3 border comentario">
     <div class="col-3 col-sm-2 px-3">
         <img class="imagen-perfil rounded-circle mx-auto my-1" alt="perfil"
             src=<?php
@@ -19,5 +19,9 @@
             <div class="col-12 col-sm-6 text-sm-right"><?php echo date("h:i d/m/Y", strtotime($comentario['fechaCreac'])); ?></div>
         </div>
         <p class="my-3"><?php echo $comentario['contenido']; ?></p>
+        <?php
+            if ($comentario['idUsuario'] == $_SESSION['idUsuario'])
+                echo '<button idcoment="'.$comentario['idComentario'].'" class="btn btn-link p-0 eliminar-comentario">Eliminar</button>'
+        ?>
     </div>
 </div>
